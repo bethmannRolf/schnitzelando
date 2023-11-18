@@ -284,6 +284,7 @@ function renderBasket() {
     for (let i = 0; i < dishesBasket.length; i++) {
         const basketdish = dishesBasket[i];
         let newSum = basketdish['price'] * basketdish['amount'];
+        const formattedNewSum = newSum.toFixed(2).replace('.', ',');
 
 
         basketContent.innerHTML += `
@@ -291,7 +292,7 @@ function renderBasket() {
     <div class="firstline-dishbasket">
         <span class="amount-basket">${basketdish['amount']}</span>
         <span class="dishname-basket">${basketdish['dishName']}</span>
-        <span class="sum-dishbasket">${newSum.toFixed(2)}€</span>
+        <span class="sum-dishbasket">${formattedNewSum} €</span>
     </div>
     <div class="secondline-dishbasket">
         <span onclick="openInput(${i})" class="make-annotation">Anmerkung hinzufügen</span>
@@ -322,7 +323,7 @@ function chechIfBill() {
 
     } else {
 
-        renderBill()
+        renderBill();
     }
 
 }
@@ -351,6 +352,7 @@ function saveInput(i) {
     let annotation = annotationInput.value;
     dishesBasket[i]['comment'] = annotation;
     renderBasket();
+    saveBasketToLS();
 }
 
 
@@ -413,27 +415,30 @@ function renderBill() {
     <div id="billing-description">
          <div id="subtotal">
          <span>Zwischensumme</span>
-         <span>${subtotal.toFixed(2)} €</span>
+         <span>${subtotal.toFixed(2).replace('.', ',')} €</span>
          </div>
          <div id="delivery-costs">
          <span>Lieferkosten</span>
-         <span>${DELIVERY_COSTS.toFixed(2)} €</span>
+         <span>${DELIVERY_COSTS.toFixed(2).replace('.', ',')} €</span>
          </div>
         <div id="total-sum">
         <span>Gesamt</span>
-        <span>${total.toFixed(2)} €</span>
+        <span>${total.toFixed(2).replace('.', ',')} €</span>
         </div>
     
     </div>
   
     <button class="pay-class" id="paybutton" onclick="clearBasket()">
-    <span  id="paybutton-span">Bezahlen (${total.toFixed(2)} €)</span>
+    <span  id="paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
     </button>
     </div>
     
     
     `
 }
+
+// const formattedPrice =dish['price'].toFixed(2).replace('.', ',');
+
 
 
  function additionalOrder(){
