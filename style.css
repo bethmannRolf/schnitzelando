@@ -207,6 +207,12 @@ main {
     border-radius: 5px;
     padding: 8px;
     margin: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.offer-text{
+    text-align: center;
 }
 
 #menu-card {
@@ -501,6 +507,7 @@ padding: 32px;
     padding-left: 8px;
     padding-right: 8px;
 }
+
 
 
 /* Media-Querries */

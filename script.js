@@ -96,7 +96,7 @@ function renderFavoriteDishes() {
           <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
        </div>
        <span>${dish['dishdescription']}</span>
-       <span>${formattedPrice}€</span>
+       <span>${formattedPrice} €</span>
     </div>`
     }
 }
@@ -119,7 +119,7 @@ function renderSteakDishes() {
           <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
        </div>
        <span>${dish['dishdescription']}</span>
-       <span>${formattedPrice}€</span>
+       <span>${formattedPrice} €</span>
     </div>`
     }
 }
@@ -142,7 +142,7 @@ function renderBurgerDishes() {
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
            </div>
            <span>${dish['dishdescription']}</span>
-           <span>${formattedPrice}€</span>
+           <span>${formattedPrice} €</span>
         </div>`
     }
 }
@@ -165,7 +165,7 @@ function renderSchnitzelDishes() {
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
            </div>
            <span>${dish['dishdescription']}</span>
-           <span>${formattedPrice}€</span>
+           <span>${formattedPrice} €</span>
         </div>`
     }
 }
@@ -186,7 +186,7 @@ function renderSaladDishes() {
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
            </div>
            <span>${dish['dishdescription']}</span>
-           <span>${formattedPrice}€</span>
+           <span>${formattedPrice} €</span>
         </div>`
     }
 }
@@ -207,7 +207,7 @@ function renderDrinkDishes() {
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
            </div>
            <span>${dish['dishdescription']}</span>
-           <span>${formattedPrice}€</span>
+           <span>${formattedPrice} €</span>
         </div>`
     }
 }
