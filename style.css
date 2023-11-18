@@ -211,6 +211,15 @@ main {
     flex-direction: column;
 }
 
+#heart-navigation{
+    margin-left: 4px;
+}
+
+.nav-text-point{
+    font-size: 120%;
+    font-weight: bold;
+}
+
 .offer-text{
     text-align: center;
 }
