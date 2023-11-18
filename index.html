@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Das Grillhaus</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="icon" type="image/png" href="./img/grill.png">
+</head>
+
+<body onload="renderDishes()" >
+  <div id="information-popup">
+    <h2 id="delivery-time-heading">Lieferzeiten</h2>
+    <div id="days-whole-table">
+      <div class="delivery-day-div">
+        <span >Montag</span>
+        <span>12:00-18:00 Uhr</span>
+      </div>
+      <div class="delivery-day-div">
+        <span >Dienstag</span>
+        <span>12:00-20:00 Uhr</span>
+      </div>
+      <div class="delivery-day-div">
+        <span >Mittwoch</span>
+        <span>12:00-20:00 Uhr</span>
+      </div>
+      <div class="delivery-day-div">
+        <span >Donnerstag</span>
+        <span>Ruhetag</span>
+      </div>
+      <div class="delivery-day-div">
+        <span >Freitag</span>
+        <span>12:00-21:00 Uhr</span>
+      </div>
+      <div class="delivery-day-div">
+        <span>Samstag</span>
+        <span>12:00-22:00 Uhr</span>
+      </div>
+      <div class="delivery-day-div">
+        <span >Sonntag</span>
+        <span>12:00-21:00 Uhr</span>
+      </div>
+    </div>
+
+  <span id="payment-condition"><b>Zahlung möglich mit:</b> Bar, Überweisung, PayPal, ApplePay, Klarna</span>
+
+  </div>
+  <header onclick="hideInformation()">
+    <div id="brand-section">
+      <img id="brand-image" src="./img/grill.png" width="40px" height="auto">
+      <span id="brand-span">Schnitzelando</span>
+    </div>
+
+    <div id="heading-center-section">
+      <span id="heading-center">Speisekarte</span>
+    </div>
+    <div id="right-header-section">
+      <div>
+        <img id="country-flag" src="./img/german_round.png" width="24px" height="auto">
+      </div>
+      <div>
+        <img id="burger-menu" src="./img/menu.svg" width="32px" height="auto">
+      </div>
+    </div>
+  </header>
+  <div id="sup-main-content">
+    <main>
+      <img src="./img/steak_spices.jpg" onclick="hideInformation()" width="100%" height="auto"> <!-- Titelbild -->
+      <div id="part-below-picture">
+        <div id="heading-section">
+          <div id="heading-div">
+            <h1>Das Grillhaus</h1>
+          </div>
+          <div id="additional-information-div">
+            <img id="information-image" onclick="openPopup()" src="./img/info.png" alt="Information" width="24px"
+              height="24px">
+            <div id="like-section">
+            </div>
+          </div>
+        </div>
+        <div id="rating-section">
+          <img id="rating-image" src="./img/rating4.png" height="24px" width="auto">
+          <span id="rating-text">378 Bewertungen</span>
+        </div>
+        <div id="order-information">
+          <img id="shopping-basket-image" src="./img/shopping_basket.png">
+          <span id="minimum-order-value"> min. 15 Euro</span>
+          <span>||</span>
+          <img id="transportation-image" src="./img/bike.png">
+          <span id="transportation-costs"> 2 Euro</span>
+        </div>
+        <div id="offer-section">
+          <h2>Angebote</h2>
+          <div id="offers">
+            <div class="offer-plate">
+              <h3 class="offer-heading">Keine Lieferkosten</h3>
+              <span class="offer-text">Bei Selbstabholung</span>
+            </div>
+            <div class="offer-plate">
+              <h3 class="offer-heading">Donnerstags</h3>
+              <span class="offer-text">Jetzt Livemusik</span>
+            </div>
+          </div>
+        </div>
+        <div id="search-and-nav" onclick="hideInformation()">
+          <div id="searchfield-div">
+            <img src="./img/search.png" onclick="showInputSearch()" id="searchfield-image">
+            <div id="search-and-close">
+              <input id="search-input" onkeydown="filterDishes()">
+              <img id="close-btn" src="./img/close.png" width="24px" onclick="hideXSearchInput()">
+            </div>
+          </div>
+          <nav id="navgationbar">
+            <a href="#favorites-div" class="dish-class"><span>Beliebt</span><img src="./img/heart2.png" width="12px"
+                height="12px"></a>
+            <span>||</span>
+            <a href="#steak-div" class="dish-class"><span>Steaks</span></a>
+            <span>||</span>
+            <a href="#burger-div" class="dish-class">Burger</a>
+            <span>||</span>
+            <a href="#schnitzel-div" class="dish-class">Schnitzel</a>
+            <span>||</span>
+            <a href="#salad-div" class="dish-class">Salate</a>
+            <span>||</span>
+            <a href="#drinks-div" class="dish-class">Getränke</a>
+          </nav>
+        </div>
+      </div>
+      <div id="menu-card" onclick="hideInformation()"> <!--Menükarte-->
+        <section class="dishes-plate">
+          <img src="./img/currywurst_pommes_flat.jpg" width="100%" height="auto" alt="Favoriten">
+          <h2 class="dish-heading">Beliebt</h2>
+          <div id="favorites-div">
+          </div>
+        </section>
+        <section class="dishes-plate">
+          <img src="./img/steak_flat.jpg" width="100%" height="auto">
+          <h2 class="dish-heading">Steaks</h2>
+          <div id="steak-div">
+          </div>
+        </section>
+        <section class="dishes-plate">
+          <img src="./img/burger_pommes_flat.jpg" width="100%" height="auto">
+          <h2 class="dish-heading">Burger</h2>
+          <div id="burger-div">
+          </div>
+        </section>
+        <section class="dishes-plate">
+          <img src="./img/jaegerschnitzel_flat.jpg" width="100%" height="auto">
+          <h2 class="dish-heading">Schnitzel</h2>
+          <div id="schnitzel-div">
+          </div>
+        </section>
+        <section class="dishes-plate">
+          <img src="./img/salad_flat.jpg" width="100%" height="auto">
+          <h2 class="dish-heading">Salate</h2>
+          <div id="salad-div">
+          </div>
+        </section>
+        <section class="dishes-plate">
+          <img src="./img/drinks_flat.jpg" width="100%" height="auto">
+          <h2 class="dish-heading">Getränke</h2>
+          <div id="drinks-div">
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside onclick="hideInformation()">
+      <div id="whole-basket">
+        <h2 id="staticbasket-heading">Warenkorb</h2>
+        <div id="checkbox" class="check">
+          <img src="./img/check_green.png" height="80px">
+          <h2 class="on-Way">Ihre Lieferung ist unterwegs !</h2>
+          <button id="shop-on" onclick="additionalOrder()">Weitere Bestellung</button>
+        </div>
+        <div id="sub-basket">
+          <div id="emty-basket">
+            <img src="./img/shopping_basket.png">
+            <p>Bitte wählen Sie Ihr Wunschmenü in der Menükarte</p>
+
+          </div>
+
+          <div id="content-basket">
+          </div>
+          <div id="basket-endcalculations">
+          </div>
+        </div>
+
+      </div>
+
+    </aside>
+  </div>
+
+  <footer onclick="hideInformation()">
+
+    <div id="private-policy-section">
+      <a href="#">
+        <h2 id="private-policy-heading">Datenschutz</h2>
+      </a>
+    </div>
+    <div>
+      <a href="#">
+        <h2 id="impressum">Impressum</h2>
+      </a>
+    </div>
+
+  </footer>
+
+  <script language="javascript" type="text/javascript" src="templates.js"></script>
+  <script language="javascript" type="text/javascript" src="data.js"></script>
+  <script language="javascript" type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
