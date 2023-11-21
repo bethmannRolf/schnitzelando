@@ -211,16 +211,16 @@ main {
     flex-direction: column;
 }
 
-#heart-navigation{
+#heart-navigation {
     margin-left: 4px;
 }
 
-.nav-text-point{
+.nav-text-point {
     font-size: 120%;
     font-weight: bold;
 }
 
-.offer-text{
+.offer-text {
     text-align: center;
 }
 
@@ -288,6 +288,8 @@ main {
 
 .singledish-container {
     padding-top: 24px;
+    padding-right: 6px;
+    padding-left: 6px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -314,14 +316,67 @@ aside {
     max-height: 100vh;
     overflow-y: auto;
     position: fixed;
-    width: 20%;
-    padding-right: 24px;
+   
+ 
+
+
 }
+
+#whole-basket::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+#whole-basket::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#mobile-basket{
+width: 100%;
+height: 100%;
+ position: fixed;
+ overflow-y: hidden;
+   background-color: red;
+   opacity: 1;
+
+}
+
+#changeToMB{
+
+
+}
+
+#mobile-paybutton-div{
+    position: fixed;
+    bottom: 0;
+    left: 35%;
+}
+
+#mobile-paybutton{
+
+    background-color: #f36805;
+    font-size: 150%;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 32px;
+    font-weight: 600;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#mobile-paybutton:hover{
+    background-color: #ac5516;
+
+}
+
+
 
 #paybutton {
     margin-bottom: 64px;
     text-align: center;
-  
+
 }
 
 #paybutton:hover {
@@ -364,6 +419,7 @@ footer {
 
 .make-annotation {
     text-decoration: underline;
+    padding-right: 6px;
 }
 
 .make-annotation:hover {
@@ -475,8 +531,10 @@ footer {
 }
 
 
-#information-popup{
-    
+
+
+#information-popup {
+
     width: 300px;
     position: absolute;
     left: 30%;
@@ -486,30 +544,30 @@ footer {
     flex-direction: column;
     gap: 16px;
     border-radius: 4px;
-    border:2px solid black;
+    border: 2px solid black;
 }
 
-#delivery-time-heading{
+#delivery-time-heading {
 
     text-align: center;
     padding-top: 4px;
 }
 
-#days-whole-table{
+#days-whole-table {
 
-display: flex;
-flex-direction: column;
-gap: 16px;
-padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
 }
 
-.delivery-day-div{
+.delivery-day-div {
 
     display: flex;
     justify-content: space-between;
 }
 
-#payment-condition{
+#payment-condition {
 
     text-align: center;
     padding-bottom: 16px;
@@ -518,59 +576,120 @@ padding: 32px;
 }
 
 
+#mobile-basket-headingline{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#close-btn-mobile:hover{
+    background-color: light;
+    border-radius: 50%;
+    scale: 110%;
+}
 
 /* Media-Querries */
 
 @media(max-width:1660px) {
 
-.amount-basket{
-   font-size: 80%;
+    .amount-basket {
+        font-size: 80%;
+    }
+
+    .dishname-basket {
+        font-size: 80%;
+    }
+
+    #paybutton {
+        width: 90%;
+
+    }
+
+    .sum-dishbasket {
+        font-size: 80%;
+    }
+
 }
 
-.dishname-basket{
-    font-size: 80%;
+@media(max-width:1440px) {
+
+    #part-below-picture {
+        margin-left: 20px;
+        padding-right: 20px;
+
+    }
+
+    #whole-basket {
+        padding-right: 4px;
+    }
+
+ 
+
+    #menu-card {
+        margin-top: 24px;
+        margin-left: 20px;
+    }
+
+/* main{
+    width: 70%;
+} */
+
+
 }
 
-.sum-dishbasket{
-    font-size: 80%;
+
+
+@media(max-width:1300px) {
+
+    aside{min-width: 300px;
+        margin-right: 0;
+        padding-right: 0
+
+    }
+
 }
 
 
 
+@media(max-width:920px) {
+
+    #searchfield-image{
+
+        width: 16px;
+        height: 16px;
+    
     }
 
+    .nav-text-point{
 
-
-    @media(max-width:1440px) {
-
-        #part-below-picture{
-            margin-left: 20px;
-            padding-right: 20px;
-
-        }
-
-        #whole-basket{
-            padding-right: 4px;
-        }
-     
-
-        #menu-card {
-            margin-top: 24px;
-            margin-left: 20px;
-        }
-
-
+        font-size: 80%;
     }
 
+#search-and-nav{
+    align-items: center;
+}
+
+}
 
 
-    @media(max-width:1340px) {
 
+@media(max-width:770px) {
+
+    #search-and-nav{
+        align-items: center;
+        flex-direction: column;
     }
 
+#navigationbar{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 
-    @media(max-width:px) {
+}
 
 
-    }
+
+
+
+@media(max-width:px) {}

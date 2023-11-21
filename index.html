@@ -11,6 +11,12 @@
 </head>
 
 <body onload="renderDishes()" >
+<div id="mobile-basket" class="d-none"><!--hier kommt display none hinein-->
+</div>
+<div id="mobile-paybutton-div">
+
+</div>
+
   <div id="information-popup">
     <h2 id="delivery-time-heading">Lieferzeiten</h2>
     <div id="days-whole-table">
@@ -168,7 +174,7 @@
       </div>
     </main>
 
-    <aside onclick="hideInformation()">
+    <aside id="aside" onclick="hideInformation()">
       <div id="whole-basket">
         <h2 id="staticbasket-heading">Warenkorb</h2>
         <div id="checkbox" class="check">
