@@ -196,6 +196,4 @@ let dishes = [
 
 
 
-let dishesBasket = [
-
-];
+let dishesBasket = [];

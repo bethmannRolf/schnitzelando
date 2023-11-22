@@ -4,6 +4,7 @@ DELIVERY_COSTS = 2.00;
 
 
 
+
 function renderDishes() {
     hideSearchInput();
     renderLike();
@@ -17,6 +18,7 @@ function renderDishes() {
     renderBasket();
     hideClearedBasket();
     hideInformation()
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
 }
 
 function hideInformation() {
@@ -66,12 +68,13 @@ function filterDishes() {
 function hideSearchInput() {
 
     document.getElementById('search-and-close').classList.add('d-none');
-
+   
 }
 
 function hideXSearchInput() {
 
     document.getElementById('search-and-close').classList.add('d-none');
+   
 }
 
 
@@ -265,6 +268,10 @@ function changeLikeColor() {
 
 function addToBasket(index) {
 
+    if (!Array.isArray(dishesBasket)) {
+        dishesBasket = [];
+    }
+
     const existingIndex = dishesBasket.findIndex(item => item.dishnumber === dishes[index].dishnumber);
     if (existingIndex !== -1) {
         dishesBasket[existingIndex].amount += 1;
@@ -273,7 +280,7 @@ function addToBasket(index) {
         dishesBasket.push(selectedDish);
     }
     renderBasket();
-   
+    renderMobilePaybutton();
     saveBasketToLS();
 }
 
@@ -369,22 +376,24 @@ function saveInput(i) {
 
 function reduceAmount(i) {
 
-    if (dishesBasket[i].amount > 1) {
-        dishesBasket[i].amount -= 1;
+    if (dishesBasket[i]['amount'] > 1) {
+        dishesBasket[i]['amount'] -= 1;
     } else {
         dishesBasket.splice(i, 1);
     }
-
+    renderMobilePaybutton();
     renderBasket();
     renderMobileBasket();
     saveBasketToLS();
+   
 
 
 }
 
 function increaseAmount(i) {
 
-    dishesBasket[i].amount += 1;
+    dishesBasket[i]['amount'] += 1;
+    renderMobilePaybutton();
     renderBasket();
     renderMobileBasket();
     saveBasketToLS();
@@ -395,7 +404,7 @@ function calculateBill() {
 
     let subtotal = 0;
 
- 
+
 
     for (let i = 0; i < dishesBasket.length; i++) {
         const basketdish = dishesBasket[i];
@@ -444,25 +453,32 @@ function renderBill() {
             <span  id="paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
         </button>
     </div>
-    
-    
     `
 }
 
+
+
+
+
+
+
 function renderMobilePaybutton() {
     let newMobilePaybtn = document.getElementById('mobile-paybutton-div');
- newMobilePaybtn.innerHTML = '';
+    newMobilePaybtn.innerHTML = '';
 
- let { subtotal } = calculateBill();
+    let { subtotal } = calculateBill();
 
- let total = subtotal + DELIVERY_COSTS;
+    let total = subtotal + DELIVERY_COSTS;
 
- newMobilePaybtn.innerHTML = `<div><button class="pay-class" id="mobile-paybutton" onclick="showMobileBasket()" >
+    console.log('Subtotal:', subtotal);
+    console.log('Total:', total);
+
+    newMobilePaybtn.innerHTML = `<div><button class="pay-class" id="mobile-paybutton" onclick="clearMobileBasket()" >
  <span  id="mobile-paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
  </button></div>`;
 
 }
-// const formattedPrice =dish['price'].toFixed(2).replace('.', ',');
+// const formattedPrice =dish['price'].toFixed(2).replace('.', ','); onclick="fromMBtoDishes()"
 
 
 
@@ -472,20 +488,17 @@ function additionalOrder() {
     saveBasketToLS();
     hideClearedBasket()
     renderBasket()
+}
 
+function additionalMobilOrder(){
 
+document.getElementById('mobile-basket').classList.add('d-none');
+document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
+document.getElementById('mobileBasket-checkdiv').classList.add('d-none');   
 }
 
 
-
-function increaseAmount(i) {
-
-    dishesBasket[i].amount += 1;
-    renderBasket();
-    renderMobileBasket()
-    saveBasketToLS();
-}
-
+ 
 function saveBasketToLS() {
     let dishesBasketAsText = JSON.stringify(dishesBasket);
     localStorage.setItem('dishesBasket', dishesBasketAsText);
@@ -503,62 +516,79 @@ function loadBasketFromLS() {
 
 function showMobileBasket() {
 
+    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
     document.getElementById('mobile-basket').classList.toggle('d-none');
     renderMobileBasket();
 }
 
-function renderMobileBasket(){
-    let mobileBasketContent = document.getElementById('mobile-basket');
+function renderMobileBasket() {
+    let mobileBasketContent = document.getElementById('mobile-renderBasket');
     mobileBasketContent.innerHTML = '';
 
     for (let i = 0; i < dishesBasket.length; i++) {
         const mobileBasketDish = dishesBasket[i];
         let newSum = mobileBasketDish['price'] * mobileBasketDish['amount'];
         const formattedNewSum = newSum.toFixed(2).replace('.', ',');
+
+
         mobileBasketContent.innerHTML += `
         
-        <div id="basket-mobile-template">
-        
-            <div id="mobile-basket-headingline">
-                <h2 id="basket-mobile-heading">
-                <img id="close-btn-mobile" onclick="closeMobileBasket()" src="./img/close.png" width="24px" height="24px" >
-            </div>
-            <div class="firstline-mobile-basket">
-                <div class="leftside-firstline-mobilebasket">
-                    <span class="amount-mobileBasket">${mobileBasketDish['amount']}</span>
-                    <span class=""dishname-mobileBasket">${mobileBasketDish['dishName']}</span>
-                </div>
-                <span class="sum-dishmobileBasket">${formattedNewSum}</span>
-            </div>
-            <div class="secondline-mobile-basket">
-                <span onclick="openInput(${i})" class="make-annotation-mobile">Anmerkung hinzufügen</span>
-                <div class="change-amounts-mobile">
-                    <img class="basketDishRomoveMobile" onclick="reduceAmount(${i})" src="./img/remove.png" width="24px" height="24px">
-                    <span class="amount-mobilebasket">${mobileBasketDish['amount']}</span>
-                    <img class="basketDishAddMobile" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px" >
-                </div>
-            </div>
+        <div class="firstline-mobile-basket">
+<div class="leftside-firstline-mobilebasket">
+    <span class="amount-mobileBasket">${mobileBasketDish['amount']}</span>
+    <span class=""dishname-mobileBasket">${mobileBasketDish['dishName']}</span>
+</div>
+<span class="sum-dishmobileBasket">${formattedNewSum}</span>
+</div>
+<div class="secondline-mobile-basket">
+<span onclick="openInput(${i})" class="make-annotation-mobile">Anmerkung hinzufügen</span>
+<div class="change-amounts-mobile">
+    <img class="basketDishRomoveMobile" onclick="reduceAmount(${i})" src="./img/remove.png" width="24px" height="24px">
+    <span class="amount-mobilebasket">${mobileBasketDish['amount']}</span>
+    <img class="basketDishAddMobile" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px" >
+</div>
+</div>
 
-            <div id="input-container${i}">
-            </div>
-            <div id="saved-comment">${mobileBasketDish['comment']}
-            </div>
-
-            <div id="mobilebasket-endcalculation">
-            </div>
-        </div>
+<div id="input-container${i}">
+</div>
+<div id="saved-comment">${mobileBasketDish['comment']}
+</div>
         `
-        checkIfMobileBill();
     }
+    checkIfMobileBill();
     // renderMobileBill();
 }
 
-function checkIfMobileBill(){
-    let mobileEndCalc = document.getElementById('mobilebasket-endcalculation');
+function clearMobileBasket(){
+    // let clearedContentMobileBasket = document.getElementById('mobile-renderBasket');
+    // clearedContentMobileBasket.innerHTML = '';
+
+    let clearedMobilBasketEndcalculations = document.getElementById('mobile-basket-html-endcaluculation');
+     clearedMobilBasketEndcalculations.innerHTML = '';
+
+    
+
+    dishesBasket = [];
+     document.getElementById('mobile-paybutton-div').classList.add('d-none')
+    document.getElementById('mobileBasket-checkdiv').classList.remove('d-none')
+    saveBasketToLS();
+    renderMobileBasket();
+}   
+
+function fromMBtoDishes() {
+
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
+    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
+    document.getElementById('mobile-basket').classList.add('d-none')
+}
+function checkIfMobileBill() {
+    let mobileEndCalc = document.getElementById('mobile-basket-html-endcaluculation');
 
     if (dishesBasket == '') {
 
         mobileEndCalc.innerHTML = '';
+        // und Bezahlen button nicht funktional
 
     } else {
 
@@ -567,9 +597,9 @@ function checkIfMobileBill(){
 
 }
 
-function renderMobileBill(){
+function renderMobileBill() {
 
-    let mobileBilling = document.getElementById('mobilebasket-endcalculation');
+    let mobileBilling = document.getElementById('mobile-basket-html-endcaluculation');
     mobileBilling.innerHTML = '';
 
 
@@ -601,12 +631,19 @@ function renderMobileBill(){
 }
 
 function closeMobileBasket() {
+    document.getElementById('mobile-basket').classList.add('d-none')
+
 }
 
-function openMobileBasket() {
+function closeMobileWithX() {
+    document.getElementById('shoppingBasket-mobileButton-div').classList.toggle('d-none')
+    document.getElementById('mobile-paybutton-div').classList.toggle('d-none')
+    document.getElementById('mobile-basket').classList.add('d-none')
+
 }
 
-window.addEventListener('resize', function() {
+
+window.addEventListener('resize', function () {
     checkWindowWidth();
 });
 
@@ -615,13 +652,17 @@ function checkWindowWidth() {
     if (window.innerWidth < 770) {
         // Der Code, der bei einer Breite unter 770px ausgeführt werden soll
         renderMobilePaybutton();
-        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-        document.getElementById('aside').classList.add('d-none')
+
+        // document.getElementById('mobile-paybutton-div').classList.remove('d-none');
+        document.getElementById('aside').classList.add('d-none');
+        document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
     } else {
         // Der Code, der bei einer Breite von 770px oder mehr ausgeführt werden soll
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
         document.getElementById('aside').classList.remove('d-none')
         document.getElementById('mobile-basket').classList.add('d-none');
+        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+        renderBasket();
     }
 }
 

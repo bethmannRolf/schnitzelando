@@ -10,34 +10,50 @@
   <link rel="icon" type="image/png" href="./img/grill.png">
 </head>
 
-<body onload="renderDishes()" >
-<div id="mobile-basket" class="d-none"><!--hier kommt display none hinein-->
-</div>
-<div id="mobile-paybutton-div">
+<body onload="renderDishes()">
+  <div id="mobile-basket" class="d-none">
+    <div id="mobile-basket-headingline">
+      <h2 id="basket-mobile-heading">Warenkorb</h2>
+      <img id="close-btn-mobile" onclick="closeMobileWithX()" src="./img/close.png" width="24px" height="24px">
+    </div>
+  <div id="mobileBasket-checkdiv" class="d-none" >
+    <img id="mobileBasket-checkImage" src="./img/check_green.png" width="48px" height="48px">
+    <h2 class="on-Way">Ihre Lieferung ist unterwegs !</h2>
+    <button id="shop-on" onclick="additionalMobilOrder()">Weitere Bestellung</button>
+  </div>
+    <div id="mobile-renderBasket"></div>
+    <div id="mobile-basket-html-endcaluculation"></div>
 
-</div>
+  </div>
+  <div id="mobile-paybutton-div" >
+  </div>
+  <div id="shoppingBasket-mobileButton-div" class="d-none">
+    <div id="shoppingBasket-mobileButton" onclick="showMobileBasket()">
+      <span id="shoppingBasket-mobileButton-span">Warenkorb</span>
+    </div>
+  </div>
 
   <div id="information-popup">
     <h2 id="delivery-time-heading">Lieferzeiten</h2>
     <div id="days-whole-table">
       <div class="delivery-day-div">
-        <span >Montag</span>
+        <span>Montag</span>
         <span>12:00-18:00 Uhr</span>
       </div>
       <div class="delivery-day-div">
-        <span >Dienstag</span>
+        <span>Dienstag</span>
         <span>12:00-20:00 Uhr</span>
       </div>
       <div class="delivery-day-div">
-        <span >Mittwoch</span>
+        <span>Mittwoch</span>
         <span>12:00-20:00 Uhr</span>
       </div>
       <div class="delivery-day-div">
-        <span >Donnerstag</span>
+        <span>Donnerstag</span>
         <span>Ruhetag</span>
       </div>
       <div class="delivery-day-div">
-        <span >Freitag</span>
+        <span>Freitag</span>
         <span>12:00-21:00 Uhr</span>
       </div>
       <div class="delivery-day-div">
@@ -45,12 +61,12 @@
         <span>12:00-22:00 Uhr</span>
       </div>
       <div class="delivery-day-div">
-        <span >Sonntag</span>
+        <span>Sonntag</span>
         <span>12:00-21:00 Uhr</span>
       </div>
     </div>
 
-  <span id="payment-condition"><b>Zahlung möglich mit:</b> Bar, Überweisung, PayPal, ApplePay, Bitcoin</span>
+    <span id="payment-condition"><b>Zahlung möglich mit:</b> Bar, Überweisung, PayPal, ApplePay, Bitcoin</span>
 
   </div>
   <header onclick="hideInformation()">
@@ -119,8 +135,8 @@
             </div>
           </div>
           <nav id="navgationbar">
-            <a href="#favorites-div" class="dish-class"><span class="nav-text-point">Beliebt</span><img src="./img/heart2.png" width="12px"
-                height="12px" id="heart-navigation"></a>
+            <a href="#favorites-div" class="dish-class"><span class="nav-text-point">Beliebt</span><img
+                src="./img/heart2.png" width="12px" height="12px" id="heart-navigation"></a>
             <span>||</span>
             <a href="#steak-div" class="dish-class"><span class="nav-text-point">Steaks</span></a>
             <span>||</span>
