@@ -1,29 +1,18 @@
-HEART_LIKED = false;
-DELIVERY_COSTS = 2.00;
-let mobileBasketOpen = false;
-
-
-function changeMobilBasketStatus(){
+function changeMobilBasketStatus() {
     mobileBasketOpen = !mobileBasketOpen;
-
-if(mobileBasketOpen == true){
-    renderMobileBasket();
-    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-    document.getElementById('mobile-basket').classList.remove('d-none')
-   renderMobilePaybutton();
-}else{
-    renderMobilePaybutton();
-     document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
-     document.getElementById('mobile-paybutton-div').classList.add('d-none')
-     document.getElementById('mobile-basket').classList.add('d-none')
-
-
+    if (mobileBasketOpen == true) {
+        renderMobileBasket();
+        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+        document.getElementById('mobile-basket').classList.remove('d-none')
+        renderMobilePaybutton();
+    } else {
+        renderMobilePaybutton();
+        document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
+        document.getElementById('mobile-paybutton-div').classList.add('d-none')
+        document.getElementById('mobile-basket').classList.add('d-none')
+    }
 }
-
-
-}
-
 
 function renderDishes() {
     hideSearchInput();
@@ -48,27 +37,17 @@ function hideInformation() {
 // Gerichte rendern
 
 function openPopup() {
-
     document.getElementById('information-popup').classList.toggle('d-none')
 }
 
-
-
 function filterDishes() {
-
     let search = document.getElementById('search-input').value
     search = search.toLowerCase();
-
-
     let searchedMenuContainer = document.getElementById('menu-card');
     searchedMenuContainer.innerHTML = '';
-
     for (let i = 0; i < dishes.length; i++) {
         let searchedDish = dishes[i];
-
-
         if (searchedDish['dishName'].toLowerCase().includes(search)) {
-
             searchedMenuContainer.innerHTML += `
             <div class="single-dish">
                <div class="single-dish-headline">
@@ -86,27 +65,21 @@ function filterDishes() {
 }
 
 function hideSearchInput() {
-
     document.getElementById('search-and-close').classList.add('d-none');
-   
 }
 
 function hideXSearchInput() {
-
     document.getElementById('search-and-close').classList.add('d-none');
-   
 }
 
 
 function showInputSearch() {
     document.getElementById('search-and-close').classList.remove('d-none')
-
 }
 
 function renderFavoriteDishes() {
     let dishesContent = document.getElementById('favorites-div');
     dishesContent.innerHTML = '';
-
     for (let i = 0; i < 3; i++) {
         const dish = dishes[i];
         const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
@@ -126,10 +99,8 @@ function renderFavoriteDishes() {
 }
 
 function renderSteakDishes() {
-
     let dishesContent = document.getElementById('steak-div');
     dishesContent.innerHTML = '';
-
     for (let i = 3; i < 6; i++) {
         const dish = dishes[i];
         const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
@@ -149,10 +120,8 @@ function renderSteakDishes() {
 }
 
 function renderBurgerDishes() {
-
     let dishesContent = document.getElementById('burger-div');
     dishesContent.innerHTML = '';
-
     for (let i = 6; i < 9; i++) {
         const dish = dishes[i];
         const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
@@ -172,10 +141,8 @@ function renderBurgerDishes() {
 }
 
 function renderSchnitzelDishes() {
-
     let dishesContent = document.getElementById('schnitzel-div');
     dishesContent.innerHTML = '';
-
     for (let i = 9; i < 12; i++) {
         const dish = dishes[i];
         const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
@@ -193,6 +160,7 @@ function renderSchnitzelDishes() {
         </div>`
     }
 }
+
 // dish['price']
 function renderSaladDishes() {
     let dishesContent = document.getElementById('salad-div');
@@ -236,34 +204,23 @@ function renderDrinkDishes() {
     }
 }
 
-
 function hideClearedBasket() {
-
     document.getElementById('checkbox').classList.add('d-none');
 }
 
 function clearBasket() {
-
-
-
     let clearedContentBasket = document.getElementById('content-basket');
     clearedContentBasket.innerHTML = '';
-
     let clearedBasketEndcalculations = document.getElementById('basket-endcalculations')
     clearedBasketEndcalculations.innerHTML = '';
-
-
     document.getElementById('checkbox').classList.remove('d-none');
-
 }
-
 
 function renderLike() {
     let likeButton = document.getElementById('like-section');
     likeButton.innerHTML = '';
     if (HEART_LIKED == false) {
-        likeButton.innerHTML =
-            `
+        likeButton.innerHTML = `
         <img id="like-img" src="./img/favorite.png" alt="Favoriten" onclick="changeLikeColor()">
          `
     }
@@ -284,14 +241,10 @@ function changeLikeColor() {
     renderLike();
 }
 
-
-
 function addToBasket(index) {
-
     if (!Array.isArray(dishesBasket)) {
         dishesBasket = [];
     }
-
     const existingIndex = dishesBasket.findIndex(item => item.dishnumber === dishes[index].dishnumber);
     if (existingIndex !== -1) {
         dishesBasket[existingIndex].amount += 1;
@@ -304,8 +257,6 @@ function addToBasket(index) {
     saveBasketToLS();
 }
 
-
-
 function renderBasket() {
     document.getElementById('emty-basket').classList.add('d-none');
     let basketContent = document.getElementById('content-basket');
@@ -314,8 +265,6 @@ function renderBasket() {
         const basketdish = dishesBasket[i];
         let newSum = basketdish['price'] * basketdish['amount'];
         const formattedNewSum = newSum.toFixed(2).replace('.', ',');
-
-
         basketContent.innerHTML += `
 <div class="singledish-container">
     <div class="firstline-dishbasket">
@@ -331,49 +280,28 @@ function renderBasket() {
             <img class="basketDishAdd" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px">
         </div>
     </div>
-
     <div id="input-container${i}">
     </div>
     <div id="saved-comment">${basketdish['comment']}>
     </div>
-
-   
 </div>
 `
     }
     checkIfBill()
-
 }
-
-
-
-
-
 
 function checkIfBill() {
-
     let endCalc = document.getElementById('basket-endcalculations');
-
     if (dishesBasket == '') {
-
         endCalc.innerHTML = '';
-
     } else {
-
         renderBill();
     }
-
 }
-
-
-
-
-
 
 function openInput(i) {
     let inputContainer = document.getElementById(`input-container${i}`);
     inputContainer.innerHTML = '';
-
     inputContainer.innerHTML = `
         <div >
             <input id="annotation-input${i}" type="text" placeholder="Anmerkung hinzufügen . . .">
@@ -382,9 +310,7 @@ function openInput(i) {
     `;
 }
 
-
 function saveInput(i) {
-
     let annotationInput = document.getElementById(`annotation-input${i}`);
     let annotation = annotationInput.value;
     dishesBasket[i]['comment'] = annotation;
@@ -392,10 +318,7 @@ function saveInput(i) {
     saveBasketToLS();
 }
 
-
-
 function reduceAmount(i) {
-
     if (dishesBasket[i]['amount'] > 1) {
         dishesBasket[i]['amount'] -= 1;
     } else {
@@ -405,13 +328,9 @@ function reduceAmount(i) {
     renderBasket();
     renderMobileBasket();
     saveBasketToLS();
-   
-
-
 }
 
 function increaseAmount(i) {
-
     dishesBasket[i]['amount'] += 1;
     renderMobilePaybutton();
     renderBasket();
@@ -419,38 +338,22 @@ function increaseAmount(i) {
     saveBasketToLS();
 }
 
-
 function calculateBill() {
-
     let subtotal = 0;
-
-
-
     for (let i = 0; i < dishesBasket.length; i++) {
         const basketdish = dishesBasket[i];
-
         subtotal += basketdish['price'] * basketdish['amount'];
     }
-
     return {
         subtotal
     }
-
-
 }
 
-
-
 function renderBill() {
-
     let billing = document.getElementById('basket-endcalculations');
     billing.innerHTML = '';
-
-
     let { subtotal } = calculateBill();
-
     let total = subtotal + DELIVERY_COSTS;
-
     billing.innerHTML = `
     <div id=""whole-bill> 
         <div id="billing-description">
@@ -466,9 +369,7 @@ function renderBill() {
                  <span>Gesamt</span>
                  <span>${total.toFixed(2).replace('.', ',')} €</span>
             </div>
-    
         </div>
-  
         <button class="pay-class" id="paybutton" onclick="clearBasket()">
             <span  id="paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
         </button>
@@ -476,50 +377,32 @@ function renderBill() {
     `
 }
 
-
-
-
-
-
-
 function renderMobilePaybutton() {
     let newMobilePaybtn = document.getElementById('mobile-paybutton-div');
     newMobilePaybtn.innerHTML = '';
-
     let { subtotal } = calculateBill();
-
     let total = subtotal + DELIVERY_COSTS;
-
     console.log('Subtotal:', subtotal);
     console.log('Total:', total);
-
     newMobilePaybtn.innerHTML = `<div><button class="pay-class" id="mobile-paybutton" onclick="clearMobileBasket()" >
  <span  id="mobile-paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
  </button></div>`;
-
 }
-// const formattedPrice =dish['price'].toFixed(2).replace('.', ','); onclick="fromMBtoDishes()"
-
-
 
 function additionalOrder() {
-
     dishesBasket = [];
     saveBasketToLS();
     hideClearedBasket()
     renderBasket()
 }
 
-function additionalMobilOrder(){
-
-document.getElementById('mobile-basket').classList.add('d-none');
-document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
-document.getElementById('mobileBasket-checkdiv').classList.add('d-none');   
-changeMobilBasketStatus();
+function additionalMobilOrder() {
+    document.getElementById('mobile-basket').classList.add('d-none');
+    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
+    document.getElementById('mobileBasket-checkdiv').classList.add('d-none');
+    changeMobilBasketStatus();
 }
 
-
- 
 function saveBasketToLS() {
     let dishesBasketAsText = JSON.stringify(dishesBasket);
     localStorage.setItem('dishesBasket', dishesBasketAsText);
@@ -531,34 +414,24 @@ function loadBasketFromLS() {
         dishesBasket = JSON.parse(dishesBasketAsText);
     }
 }
-
 //Neue Funktionen für mobile
-
-
 function showMobileBasket() {
-
     changeMobilBasketStatus()
     // document.getElementById('mobile-paybutton-div').classList.remove('d-none')
     // document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
     // document.getElementById('mobile-basket').classList.toggle('d-none');
     // renderMobileBasket();
     // mobileBasketopen = true;
-
-
 }
 
 function renderMobileBasket() {
     let mobileBasketContent = document.getElementById('mobile-renderBasket');
     mobileBasketContent.innerHTML = '';
-
     for (let i = 0; i < dishesBasket.length; i++) {
         const mobileBasketDish = dishesBasket[i];
         let newSum = mobileBasketDish['price'] * mobileBasketDish['amount'];
         const formattedNewSum = newSum.toFixed(2).replace('.', ',');
-
-
         mobileBasketContent.innerHTML += `
-        
     <div class="wholeDish-mobileBasket" >
         <div class="firstline-mobile-basket">
             <span class="amount-mobileBasket">${mobileBasketDish['amount']}
@@ -578,66 +451,48 @@ function renderMobileBasket() {
                 <img class="basketDishAddMobile" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px" >
             </div>
         </div>
-   
         <div id="input-container${i}">
         </div>
         <div id="saved-comment">${mobileBasketDish['comment']}
         </div>
     </div>
-
         `
     }
     checkIfMobileBill();
-   
 }
 
-function clearMobileBasket(){
-    
+function clearMobileBasket() {
     let clearedMobilBasketEndcalculations = document.getElementById('mobile-basket-html-endcaluculation');
-     clearedMobilBasketEndcalculations.innerHTML = '';
-
-    
-
+    clearedMobilBasketEndcalculations.innerHTML = '';
     dishesBasket = [];
-     document.getElementById('mobile-paybutton-div').classList.add('d-none')
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
     document.getElementById('mobileBasket-checkdiv').classList.remove('d-none')
     saveBasketToLS();
     renderMobileBasket();
-}   
+}
 
 function fromMBtoDishes() {
-
     document.getElementById('mobile-paybutton-div').classList.add('d-none')
     document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
     document.getElementById('mobile-basket').classList.add('d-none')
 }
+
 function checkIfMobileBill() {
     let mobileEndCalc = document.getElementById('mobile-basket-html-endcaluculation');
-
     if (dishesBasket == '') {
-
         mobileEndCalc.innerHTML = '';
         // und Bezahlen button nicht funktional
-
     } else {
-
         renderMobileBill();
     }
-
 }
 
 function renderMobileBill() {
-
     let mobileBilling = document.getElementById('mobile-basket-html-endcaluculation');
     mobileBilling.innerHTML = '';
-
-
     let { subtotal } = calculateBill();
-
     let total = subtotal + DELIVERY_COSTS;
-
     mobileBilling.innerHTML = `
-    
     <div id="whole-mobileBill">
         <div id="mobileBilling-description">
             <div id="mobil-subtotal">
@@ -655,30 +510,18 @@ function renderMobileBill() {
         </div>
     </div>
     `
-
-
 }
 
 function closeMobileBasket() {
     document.getElementById('mobile-basket').classList.add('d-none')
-
 }
 
 function closeMobileWithX() {
-
     changeMobilBasketStatus();
-
-
-
     // document.getElementById('shoppingBasket-mobileButton-div').classList.toggle('d-none')
     // document.getElementById('mobile-paybutton-div').classList.toggle('d-none')
     // document.getElementById('mobile-basket').classList.add('d-none')
-
 }
-
-
-
-
 
 window.addEventListener('resize', function () {
     checkWindowWidth();
@@ -689,36 +532,26 @@ function checkWindowWidth() {
     if (window.innerWidth < 770 && mobileBasketOpen == false) {
         // Der Code, der bei einer Breite unter 770px ausgeführt werden soll
         // renderMobilePaybutton();
-
         // document.getElementById('mobile-paybutton-div').classList.remove('d-none');
         document.getElementById('aside').classList.add('d-none');
         document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
         console.log('Nicht im MWK');
-       
-
-    } else if(window.innerWidth < 770 && (mobileBasketOpen == true)){
+    } else if (window.innerWidth < 770 && (mobileBasketOpen == true)) {
         document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
         document.getElementById('mobile-paybutton-div').classList.remove('d-none')
         console.log('Im MWK');
     }
-
- 
-
-    
-    else 
-    {
+    else {
         // Der Code, der bei einer Breite von 770px oder mehr ausgeführt werden soll
-       mobileBasketOpen = false;
+        mobileBasketOpen = false;
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
         document.getElementById('aside').classList.remove('d-none')
         document.getElementById('mobile-basket').classList.add('d-none');
         document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
         renderBasket();
         console.log('Nicht Mobil');
-        
     }
 }
-
 // // Event Listener, der alle 10 Millisekunden die Funktion aufruft
 // setInterval(checkWindowWidth, 100000);

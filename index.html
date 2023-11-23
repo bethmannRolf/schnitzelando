@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +8,29 @@
   <link rel="stylesheet" href="fonts.css">
   <link rel="icon" type="image/png" href="./img/grill.png">
 </head>
-
 <body onload="renderDishes()">
-
 <!-- mobile below -->
-
-  <div id="mobile-basket" class="d-none">
+  <div id="mobile-basket" class="d-none">  
     <div id="mobile-basket-headingline">
       <h2 id="basket-mobile-heading">Warenkorb</h2>
       <img id="close-btn-mobile" onclick="closeMobileWithX()" src="./img/close.png" width="24px" height="24px">
     </div>
-
-
-  <div id="mobileBasket-checkdiv" class="d-none" >
-    <img id="mobileBasket-checkImage" src="./img/check_green.png" width="64px" height="64px">
-    <h2 class="on-Way">Ihre Lieferung ist unterwegs !</h2>
-    <button id="shop-on" onclick="additionalMobilOrder()">Weitere Bestellung</button>
-  </div>
+    <div id="mobileBasket-checkdiv" class="d-none">
+      <img id="mobileBasket-checkImage" src="./img/check_green.png" width="64px" height="64px">
+      <h2 class="on-Way">Ihre Lieferung ist unterwegs !</h2>
+      <button id="shop-on" onclick="additionalMobilOrder()">Weitere Bestellung</button>
+    </div>
     <div id="mobile-renderBasket"></div>
     <div id="mobile-basket-html-endcaluculation"></div>
-
   </div>
-  <div id="mobile-paybutton-div" >
+  <div id="mobile-paybutton-div">
   </div>
   <div id="shoppingBasket-mobileButton-div" class="d-none">
     <div id="shoppingBasket-mobileButton" onclick="showMobileBasket()">
       <span id="shoppingBasket-mobileButton-span">Warenkorb</span>
     </div>
   </div>
-
-<!-- mobile above -->
-
+  <!-- mobile above -->
   <div id="information-popup">
     <h2 id="delivery-time-heading">Lieferzeiten</h2>
     <div id="days-whole-table">
@@ -72,16 +63,13 @@
         <span>12:00-21:00 Uhr</span>
       </div>
     </div>
-
     <span id="payment-condition"><b>Zahlung möglich mit:</b> Bar, Überweisung, PayPal, ApplePay, Bitcoin</span>
-
   </div>
   <header onclick="hideInformation()">
     <div id="brand-section">
       <img id="brand-image" src="./img/grill.png" width="40px" height="auto">
       <span id="brand-span">Schnitzelando</span>
     </div>
-
     <div id="heading-center-section">
       <span id="heading-center">Speisekarte</span>
     </div>
@@ -196,7 +184,6 @@
         </section>
       </div>
     </main>
-
     <aside id="aside" onclick="hideInformation()">
       <div id="whole-basket">
         <h2 id="staticbasket-heading">Warenkorb</h2>
@@ -209,22 +196,16 @@
           <div id="emty-basket">
             <img src="./img/shopping_basket.png">
             <p>Bitte wählen Sie Ihr Wunschmenü in der Menükarte</p>
-
           </div>
-
           <div id="content-basket">
           </div>
           <div id="basket-endcalculations">
           </div>
         </div>
-
       </div>
-
     </aside>
   </div>
-
   <footer onclick="hideInformation()">
-
     <div id="private-policy-section">
       <a href="#">
         <h2 id="private-policy-heading">Datenschutz</h2>
@@ -235,12 +216,9 @@
         <h2 id="impressum">Impressum</h2>
       </a>
     </div>
-
   </footer>
-
   <script language="javascript" type="text/javascript" src="templates.js"></script>
   <script language="javascript" type="text/javascript" src="data.js"></script>
   <script language="javascript" type="text/javascript" src="script.js"></script>
 </body>
-
 </html>

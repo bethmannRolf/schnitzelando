@@ -1,14 +1,5 @@
-/*
-
-formattedPrice
-
- const formattedPrice =dish['price'].toFixed(2).replace('.', ',');
-
-*/
-let dishes = [
-
-   // favorite dishes
-   {
+let dishes = [ 
+   { // favorite dishes
       "amount": 1,
       "dishnumber": "1",
       "dishName": "Currywurst mit Pommes",
@@ -16,7 +7,6 @@ let dishes = [
       "price": 6.99,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "2",
@@ -25,7 +15,6 @@ let dishes = [
       "price": 10.60,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "3",
@@ -34,11 +23,7 @@ let dishes = [
       "price": 5.79,
       "comment" : ""
    },
-
-
-   // steak dishes
-
-   {
+   { // steak dishes
       "amount": 1,
       "dishnumber": "4",
       "dishName": "Putensteak mit Senf",
@@ -46,7 +31,6 @@ let dishes = [
       "price": 20.24,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "5",
@@ -55,7 +39,6 @@ let dishes = [
       "price": 25.45,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "6",
@@ -64,12 +47,7 @@ let dishes = [
       "price": 30.62,
       "comment" : ""
    },
-
-
-   //burger dishes
-
-
-   {
+   {//burger dishes
       "amount": 1,
       "dishnumber": "7",
       "dishName": "Cheeseburger",
@@ -77,7 +55,6 @@ let dishes = [
       "price": 15.46,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "8",
@@ -86,7 +63,6 @@ let dishes = [
       "price": 10.67,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "9",
@@ -95,11 +71,7 @@ let dishes = [
       "price": 15.87,
       "comment" : ""
    },
-
-
-   // schnitzel dishes
-
-   {
+   { // schnitzel dishes
       "amount": 1,
       "dishnumber": "10",
       "dishName": "Jägerschnitzel",
@@ -107,7 +79,6 @@ let dishes = [
       "price": 16.20,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "11",
@@ -116,7 +87,6 @@ let dishes = [
       "price": 15.89,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "12",
@@ -125,12 +95,7 @@ let dishes = [
       "price": 10.54,
       "comment" : ""
    },
-
-
-
-   // salad dishes
-
-   {
+   {// salad dishes
       "amount": 1,
       "dishnumber": "13",
       "dishName": "Fischersalat",
@@ -138,7 +103,6 @@ let dishes = [
       "price": 15.23,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "14",
@@ -147,7 +111,6 @@ let dishes = [
       "price": 10.89,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "15",
@@ -156,10 +119,7 @@ let dishes = [
       "price": 5.78,
       "comment" : ""
    },
-
-   // drinks dishes
-
-   {
+   {//drinks dishes
       "amount": 1,
       "dishnumber": "16",
       "dishName": "Dunkles Bier",
@@ -167,7 +127,6 @@ let dishes = [
       "price": 3.21,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "17",
@@ -176,7 +135,6 @@ let dishes = [
       "price": 1.73,
       "comment" : ""
    },
-
    {
       "amount": 1,
       "dishnumber": "18",
@@ -185,15 +143,10 @@ let dishes = [
       "price": 6.99,
       "comment" : ""
    }
-
-
-
-
-
-
 ];
 
-
-
-
 let dishesBasket = [];
+
+const HEART_LIKED = false;
+const DELIVERY_COSTS = 2.00;
+let mobileBasketOpen = false;
