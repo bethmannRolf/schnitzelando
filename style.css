@@ -615,14 +615,122 @@ footer {
 #mobile-basket-headingline{
     display: flex;
     justify-content: space-between;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 8px;
+}
+
+#mobileBasket-checkdiv{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding-top: 32px;
 
 }
+
 
 #close-btn-mobile:hover{
     background-color: light;
     border-radius: 50%;
     scale: 110%;
 }
+
+.wholeDish-mobileBasket{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    margin-left: 16px;
+    border-radius: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.firstline-mobile-basket{
+    display: flex;
+    justify-content:space-between;
+    padding-bottom: 8px;
+    font-weight: 600;
+    font-size: 120%;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.secondline-mobile-basket{
+    display: flex;
+    justify-content:space-around;
+}
+
+.make-annotation-mobile{
+    text-decoration: underline;
+
+}
+
+.make-annotation-mobile:hover{
+    scale: 110%;
+}
+
+.change-amounts-mobile{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.amount-mobilebasket{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+}
+
+.basketDishRemoveMobile{
+border: 1px solid black;
+border-radius: 50%;
+background-color: lightgray;
+}
+
+.basketDishAddMobile{
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: lightgray;
+}
+
+.basketDishRemoveMobile:hover{
+scale: 110%;
+}
+
+.basketDishAddMobile:hover{
+scale: 110%;
+}
+
+.basketDishRemoveMobile:active{
+background-color: rgb(178, 173, 173);
+}
+
+.basketDishAddMobile:active{
+    background-color: rgb(178, 173, 173);
+}
+
+
+#mobileBilling-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 110%;
+}
+
+#total-mobileSum{
+    font-weight: 500;
+    border-top: 1px solid black;
+    padding-top: 6px;
+}
+
+
+
 
 /* Media-Querries */
 

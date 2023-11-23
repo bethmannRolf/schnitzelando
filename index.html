@@ -11,13 +11,18 @@
 </head>
 
 <body onload="renderDishes()">
+
+<!-- mobile below -->
+
   <div id="mobile-basket" class="d-none">
     <div id="mobile-basket-headingline">
       <h2 id="basket-mobile-heading">Warenkorb</h2>
       <img id="close-btn-mobile" onclick="closeMobileWithX()" src="./img/close.png" width="24px" height="24px">
     </div>
+
+
   <div id="mobileBasket-checkdiv" class="d-none" >
-    <img id="mobileBasket-checkImage" src="./img/check_green.png" width="48px" height="48px">
+    <img id="mobileBasket-checkImage" src="./img/check_green.png" width="64px" height="64px">
     <h2 class="on-Way">Ihre Lieferung ist unterwegs !</h2>
     <button id="shop-on" onclick="additionalMobilOrder()">Weitere Bestellung</button>
   </div>
@@ -32,6 +37,8 @@
       <span id="shoppingBasket-mobileButton-span">Warenkorb</span>
     </div>
   </div>
+
+<!-- mobile above -->
 
   <div id="information-popup">
     <h2 id="delivery-time-heading">Lieferzeiten</h2>

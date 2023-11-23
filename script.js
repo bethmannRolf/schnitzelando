@@ -534,36 +534,40 @@ function renderMobileBasket() {
 
         mobileBasketContent.innerHTML += `
         
+    <div class="wholeDish-mobileBasket" >
         <div class="firstline-mobile-basket">
-<div class="leftside-firstline-mobilebasket">
-    <span class="amount-mobileBasket">${mobileBasketDish['amount']}</span>
-    <span class=""dishname-mobileBasket">${mobileBasketDish['dishName']}</span>
-</div>
-<span class="sum-dishmobileBasket">${formattedNewSum}</span>
-</div>
-<div class="secondline-mobile-basket">
-<span onclick="openInput(${i})" class="make-annotation-mobile">Anmerkung hinzufügen</span>
-<div class="change-amounts-mobile">
-    <img class="basketDishRomoveMobile" onclick="reduceAmount(${i})" src="./img/remove.png" width="24px" height="24px">
-    <span class="amount-mobilebasket">${mobileBasketDish['amount']}</span>
-    <img class="basketDishAddMobile" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px" >
-</div>
-</div>
+            <span class="amount-mobileBasket">${mobileBasketDish['amount']}
+            </span>
+            <span class=""dishname-mobileBasket">${mobileBasketDish['dishName']}
+            </span>
+            <span class="sum-dishmobileBasket">${formattedNewSum} €
+            </span>
+        </div>
+        <div class="secondline-mobile-basket">
+            <span onclick="openInput(${i})" class="make-annotation-mobile">Anmerkung hinzufügen
+            </span>
+            <div class="change-amounts-mobile">
+                <img class="basketDishRemoveMobile" onclick="reduceAmount(${i})" src="./img/remove.png" width="24px" height="24px">
+                <span class="amount-mobilebasket">${mobileBasketDish['amount']}
+                </span>
+                <img class="basketDishAddMobile" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px" >
+            </div>
+        </div>
+   
+        <div id="input-container${i}">
+        </div>
+        <div id="saved-comment">${mobileBasketDish['comment']}
+        </div>
+    </div>
 
-<div id="input-container${i}">
-</div>
-<div id="saved-comment">${mobileBasketDish['comment']}
-</div>
         `
     }
     checkIfMobileBill();
-    // renderMobileBill();
+   
 }
 
 function clearMobileBasket(){
-    // let clearedContentMobileBasket = document.getElementById('mobile-renderBasket');
-    // clearedContentMobileBasket.innerHTML = '';
-
+    
     let clearedMobilBasketEndcalculations = document.getElementById('mobile-basket-html-endcaluculation');
      clearedMobilBasketEndcalculations.innerHTML = '';
 
