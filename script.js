@@ -1,8 +1,28 @@
 HEART_LIKED = false;
 DELIVERY_COSTS = 2.00;
+let mobileBasketOpen = false;
 
 
+function changeMobilBasketStatus(){
+    mobileBasketOpen = !mobileBasketOpen;
 
+if(mobileBasketOpen == true){
+    renderMobileBasket();
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+    document.getElementById('mobile-basket').classList.remove('d-none')
+   renderMobilePaybutton();
+}else{
+    renderMobilePaybutton();
+     document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
+     document.getElementById('mobile-paybutton-div').classList.add('d-none')
+     document.getElementById('mobile-basket').classList.add('d-none')
+
+
+}
+
+
+}
 
 
 function renderDishes() {
@@ -495,6 +515,7 @@ function additionalMobilOrder(){
 document.getElementById('mobile-basket').classList.add('d-none');
 document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
 document.getElementById('mobileBasket-checkdiv').classList.add('d-none');   
+changeMobilBasketStatus();
 }
 
 
@@ -516,10 +537,14 @@ function loadBasketFromLS() {
 
 function showMobileBasket() {
 
-    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-    document.getElementById('mobile-basket').classList.toggle('d-none');
-    renderMobileBasket();
+    changeMobilBasketStatus()
+    // document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+    // document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+    // document.getElementById('mobile-basket').classList.toggle('d-none');
+    // renderMobileBasket();
+    // mobileBasketopen = true;
+
+
 }
 
 function renderMobileBasket() {
@@ -640,11 +665,19 @@ function closeMobileBasket() {
 }
 
 function closeMobileWithX() {
-    document.getElementById('shoppingBasket-mobileButton-div').classList.toggle('d-none')
-    document.getElementById('mobile-paybutton-div').classList.toggle('d-none')
-    document.getElementById('mobile-basket').classList.add('d-none')
+
+    changeMobilBasketStatus();
+
+
+
+    // document.getElementById('shoppingBasket-mobileButton-div').classList.toggle('d-none')
+    // document.getElementById('mobile-paybutton-div').classList.toggle('d-none')
+    // document.getElementById('mobile-basket').classList.add('d-none')
 
 }
+
+
+
 
 
 window.addEventListener('resize', function () {
@@ -653,20 +686,37 @@ window.addEventListener('resize', function () {
 
 function checkWindowWidth() {
     // Prüfe die innere Breite des Fensters
-    if (window.innerWidth < 770) {
+    if (window.innerWidth < 770 && mobileBasketOpen == false) {
         // Der Code, der bei einer Breite unter 770px ausgeführt werden soll
-        renderMobilePaybutton();
+        // renderMobilePaybutton();
 
         // document.getElementById('mobile-paybutton-div').classList.remove('d-none');
         document.getElementById('aside').classList.add('d-none');
         document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
-    } else {
+        document.getElementById('mobile-paybutton-div').classList.add('d-none')
+        console.log('Nicht im MWK');
+       
+
+    } else if(window.innerWidth < 770 && (mobileBasketOpen == true)){
+        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+        console.log('Im MWK');
+    }
+
+ 
+
+    
+    else 
+    {
         // Der Code, der bei einer Breite von 770px oder mehr ausgeführt werden soll
+       mobileBasketOpen = false;
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
         document.getElementById('aside').classList.remove('d-none')
         document.getElementById('mobile-basket').classList.add('d-none');
-        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
         renderBasket();
+        console.log('Nicht Mobil');
+        
     }
 }
 
