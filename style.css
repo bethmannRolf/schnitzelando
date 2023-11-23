@@ -58,7 +58,9 @@ a:hover {
 
 }
 
-
+.add-button{
+   cursor: pointer;
+}
 
 
 
@@ -145,9 +147,9 @@ header {
 
 /* main und sections */
 
-#sup-main-content {
+/* #sup-main-content {
     display: flex;
-}
+} */
 
 #part-below-picture {
     margin-left: 200px;
@@ -830,10 +832,132 @@ background-color: rgb(178, 173, 173);
 }
 
 
+#sup-main-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+main{
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
 }
 
 
 
 
 
-@media(max-width:px) {}
+@media(max-width:530px) {
+
+
+
+    #sup-main-content{
+     width: 100%;
+    }
+
+    /* .single-dish-headline{
+        width:80%;
+ 
+    } */
+
+    .single-dish{
+        padding-bottom: 4px;
+        padding-top: 4px;
+    }
+
+    h3{
+        font-size: 80%;
+    }
+
+    .dish-description{
+        font-size: 80%;
+    }
+
+    #mobile-paybutton-div{
+        left: 20%;
+    }
+
+}
+
+@media(max-width:480px) {
+
+    #heading-center{
+        display: none;
+    }
+
+}
+
+
+
+
+@media(max-width:420px) {
+
+    .add-button{
+        width: 24px;
+        height: 24px;
+    }
+
+    .single-dish-info{
+        width: 16px;
+        height: 16px;
+        
+    }
+
+    .single-dish{
+       padding-left: 0;
+       padding-right: 2px;
+    }
+
+    .firstline-mobile-basket{
+        font-size: 100%;
+    }
+    
+    main{
+        max-width: 100%;
+    }
+
+    #brand-image{
+        width: auto;
+        height: 24px;
+    }
+
+    #heading-center{
+        display: none;
+    }
+
+    header{
+        width: 80%;
+        padding-left: 8px;
+        padding-right: 8px;
+      justify-content: space-between;
+      width: 100%;
+    
+    }
+
+    #shoppingBasket-mobileButton-div{
+        left:20%;
+
+    }
+
+    #mobile-paybutton-div{
+        left: 10%;
+        width: 80%;
+    }
+}
+
+
+
+
+
+@media(max-width:410px) {
+
+ 
+
+}

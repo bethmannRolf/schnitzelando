@@ -41,7 +41,7 @@ let dishes = [
    {
       "amount": 1,
       "dishnumber": "4",
-      "dishName": "Putensteak mit Senfmarinade",
+      "dishName": "Putensteak mit Senf",
       "dishdescription": "Mit Salatbeilage und Backkartoffel",
       "price": 20.24,
       "comment" : ""

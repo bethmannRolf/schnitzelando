@@ -99,7 +99,7 @@ function renderFavoriteDishes() {
           </div>
           <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
        </div>
-       <span>${dish['dishdescription']}</span>
+       <span class="dish-description">${dish['dishdescription']}</span>
        <span>${formattedPrice} €</span>
     </div>`
     }
@@ -122,7 +122,7 @@ function renderSteakDishes() {
           </div>
           <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
        </div>
-       <span>${dish['dishdescription']}</span>
+       <span class="dish-description" >${dish['dishdescription']}</span>
        <span>${formattedPrice} €</span>
     </div>`
     }
@@ -145,7 +145,7 @@ function renderBurgerDishes() {
               </div>
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
            </div>
-           <span>${dish['dishdescription']}</span>
+           <span class="dish-description">${dish['dishdescription']}</span>
            <span>${formattedPrice} €</span>
         </div>`
     }
@@ -168,7 +168,7 @@ function renderSchnitzelDishes() {
               </div>
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
            </div>
-           <span>${dish['dishdescription']}</span>
+           <span class="dish-description">${dish['dishdescription']}</span>
            <span>${formattedPrice} €</span>
         </div>`
     }
@@ -189,7 +189,7 @@ function renderSaladDishes() {
               </div>
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
            </div>
-           <span>${dish['dishdescription']}</span>
+           <span class="dish-description">${dish['dishdescription']}</span>
            <span>${formattedPrice} €</span>
         </div>`
     }
@@ -210,7 +210,7 @@ function renderDrinkDishes() {
               </div>
               <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
            </div>
-           <span>${dish['dishdescription']}</span>
+           <span class="dish-description">${dish['dishdescription']}</span>
            <span>${formattedPrice} €</span>
         </div>`
     }
