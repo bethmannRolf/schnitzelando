@@ -14,8 +14,31 @@ function changeMobilBasketStatus() {
     }
 }
 
+
+function checkIfMobileOrNot(){
+
+    if (window.innerWidth < MOBILE_BREAKPOINT) {
+        document.getElementById('aside').classList.add('d-none');
+        document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
+        document.getElementById('mobile-paybutton-div').classList.add('d-none')
+        renderDishes()
+    }
+    else{
+        renderDishes()
+    }
+}
+
+
 function renderDishes() {
     hideSearchInput();
+    renderTopics()
+    loadBasketFromLS();
+    hideClearedBasket();
+    hideInformation()
+    addMobilePaybuttonOnload()
+}
+
+function renderTopics() {
     renderLike();
     renderFavoriteDishes();
     renderSteakDishes();
@@ -23,18 +46,12 @@ function renderDishes() {
     renderSchnitzelDishes();
     renderSaladDishes();
     renderDrinkDishes();
-    loadBasketFromLS();
     renderBasket();
-    hideClearedBasket();
-    hideInformation()
-    document.getElementById('mobile-paybutton-div').classList.add('d-none')
 }
 
 function hideInformation() {
     document.getElementById('information-popup').classList.add('d-none')
 }
-
-// Gerichte rendern
 
 function openPopup() {
     document.getElementById('information-popup').classList.toggle('d-none')
@@ -71,7 +88,6 @@ function hideSearchInput() {
 function hideXSearchInput() {
     document.getElementById('search-and-close').classList.add('d-none');
 }
-
 
 function showInputSearch() {
     document.getElementById('search-and-close').classList.remove('d-none')
@@ -161,7 +177,6 @@ function renderSchnitzelDishes() {
     }
 }
 
-// dish['price']
 function renderSaladDishes() {
     let dishesContent = document.getElementById('salad-div');
     dishesContent.innerHTML = '';
@@ -382,8 +397,6 @@ function renderMobilePaybutton() {
     newMobilePaybtn.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    console.log('Subtotal:', subtotal);
-    console.log('Total:', total);
     newMobilePaybtn.innerHTML = `<div><button class="pay-class" id="mobile-paybutton" onclick="clearMobileBasket()" >
  <span  id="mobile-paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
  </button></div>`;
@@ -414,14 +427,8 @@ function loadBasketFromLS() {
         dishesBasket = JSON.parse(dishesBasketAsText);
     }
 }
-//Neue Funktionen für mobile
 function showMobileBasket() {
     changeMobilBasketStatus()
-    // document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-    // document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-    // document.getElementById('mobile-basket').classList.toggle('d-none');
-    // renderMobileBasket();
-    // mobileBasketopen = true;
 }
 
 function renderMobileBasket() {
@@ -481,7 +488,6 @@ function checkIfMobileBill() {
     let mobileEndCalc = document.getElementById('mobile-basket-html-endcaluculation');
     if (dishesBasket == '') {
         mobileEndCalc.innerHTML = '';
-        // und Bezahlen button nicht funktional
     } else {
         renderMobileBill();
     }
@@ -518,9 +524,6 @@ function closeMobileBasket() {
 
 function closeMobileWithX() {
     changeMobilBasketStatus();
-    // document.getElementById('shoppingBasket-mobileButton-div').classList.toggle('d-none')
-    // document.getElementById('mobile-paybutton-div').classList.toggle('d-none')
-    // document.getElementById('mobile-basket').classList.add('d-none')
 }
 
 window.addEventListener('resize', function () {
@@ -528,30 +531,29 @@ window.addEventListener('resize', function () {
 });
 
 function checkWindowWidth() {
-    // Prüfe die innere Breite des Fensters
-    if (window.innerWidth < 770 && mobileBasketOpen == false) {
-        // Der Code, der bei einer Breite unter 770px ausgeführt werden soll
-        // renderMobilePaybutton();
-        // document.getElementById('mobile-paybutton-div').classList.remove('d-none');
+
+    if (window.innerWidth < MOBILE_BREAKPOINT && mobileBasketOpen == false) {
         document.getElementById('aside').classList.add('d-none');
         document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
-        console.log('Nicht im MWK');
-    } else if (window.innerWidth < 770 && (mobileBasketOpen == true)) {
+    } else if (window.innerWidth < MOBILE_BREAKPOINT && (mobileBasketOpen == true)) {
         document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
         document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-        console.log('Im MWK');
     }
     else {
-        // Der Code, der bei einer Breite von 770px oder mehr ausgeführt werden soll
         mobileBasketOpen = false;
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
         document.getElementById('aside').classList.remove('d-none')
         document.getElementById('mobile-basket').classList.add('d-none');
         document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
         renderBasket();
-        console.log('Nicht Mobil');
     }
 }
-// // Event Listener, der alle 10 Millisekunden die Funktion aufruft
-// setInterval(checkWindowWidth, 100000);
+
+/* mobile issues
+*/
+
+function addMobilePaybuttonOnload(){
+
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
+}
