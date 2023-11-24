@@ -1,6 +1,11 @@
 function changeMobilBasketStatus() {
     mobileBasketOpen = !mobileBasketOpen;
     if (mobileBasketOpen == true) {
+        renderMobileBasket();
+        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+        document.getElementById('mobile-basket').classList.remove('d-none')
+        renderMobilePaybutton();
     } else {
         renderMobilePaybutton();
         initializedMobileButtonStatus();
@@ -19,14 +24,6 @@ function checkIfMobileOrNot() {
     }
 }
 
-function mobileBasketOpen(){
-    renderMobileBasket();
-    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-    document.getElementById('mobile-basket').classList.remove('d-none')
-    renderMobilePaybutton();
-
-}
 
 
 function initializedMobileButtonStatus(){
@@ -45,19 +42,14 @@ function renderDishes() {
 
 function renderTopics() {
     renderLike();
-    renderDishCategories()
-    renderBasket();
-}
-
-function renderDishCategories(){
     renderFavoriteDishes();
     renderSteakDishes();
     renderBurgerDishes();
     renderSchnitzelDishes();
     renderSaladDishes();
     renderDrinkDishes();
+    renderBasket();
 }
-
 
 function hideInformation() {
     document.getElementById('information-popup').classList.add('d-none')
