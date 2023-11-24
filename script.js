@@ -1,30 +1,37 @@
 function changeMobilBasketStatus() {
     mobileBasketOpen = !mobileBasketOpen;
     if (mobileBasketOpen == true) {
-        renderMobileBasket();
-        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-        document.getElementById('mobile-basket').classList.remove('d-none')
-        renderMobilePaybutton();
     } else {
         renderMobilePaybutton();
-        document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
-        document.getElementById('mobile-paybutton-div').classList.add('d-none')
+        initializedMobileButtonStatus();
         document.getElementById('mobile-basket').classList.add('d-none')
     }
 }
 
 function checkIfMobileOrNot() {
-
     if (window.innerWidth < MOBILE_BREAKPOINT) {
+        initializedMobileButtonStatus()
         document.getElementById('aside').classList.add('d-none');
-        document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
-        document.getElementById('mobile-paybutton-div').classList.add('d-none')
         renderDishes()
     }
     else {
         renderDishes()
     }
+}
+
+function mobileBasketOpen(){
+    renderMobileBasket();
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+    document.getElementById('mobile-basket').classList.remove('d-none')
+    renderMobilePaybutton();
+
+}
+
+
+function initializedMobileButtonStatus(){
+    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
 }
 
 function renderDishes() {
@@ -38,14 +45,19 @@ function renderDishes() {
 
 function renderTopics() {
     renderLike();
+    renderDishCategories()
+    renderBasket();
+}
+
+function renderDishCategories(){
     renderFavoriteDishes();
     renderSteakDishes();
     renderBurgerDishes();
     renderSchnitzelDishes();
     renderSaladDishes();
     renderDrinkDishes();
-    renderBasket();
 }
+
 
 function hideInformation() {
     document.getElementById('information-popup').classList.add('d-none')
@@ -224,18 +236,20 @@ function reduceAmount(i) {
     } else {
         dishesBasket.splice(i, 1);
     }
-    renderMobilePaybutton();
-    renderBasket();
-    renderMobileBasket();
-    saveBasketToLS();
+    changedAmounts()
 }
 
 function increaseAmount(i) {
     dishesBasket[i]['amount'] += 1;
+    changedAmounts()
+}
+
+function changedAmounts(){
     renderMobilePaybutton();
     renderBasket();
     renderMobileBasket();
     saveBasketToLS();
+
 }
 
 function calculateBill() {
@@ -358,21 +372,32 @@ window.addEventListener('resize', function () {
 
 function checkWindowWidth() {
     if (window.innerWidth < MOBILE_BREAKPOINT && mobileBasketOpen == false) {
-        document.getElementById('aside').classList.add('d-none');
-        document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
-        document.getElementById('mobile-paybutton-div').classList.add('d-none')
+        checkOpenBasketFalse()
     } else if (window.innerWidth < MOBILE_BREAKPOINT && (mobileBasketOpen == true)) {
-        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-    }
-    else {
+        checkOpenBasketTrue()
+    }else {
         mobileBasketOpen = false;
-        document.getElementById('mobile-paybutton-div').classList.add('d-none')
-        document.getElementById('aside').classList.remove('d-none')
-        document.getElementById('mobile-basket').classList.add('d-none');
-        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
-        renderBasket();
+        checkDesktopWidth()
     }
+}
+
+function checkOpenBasketFalse(){
+    document.getElementById('aside').classList.add('d-none');
+    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
+}
+
+function checkOpenBasketTrue(){
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
+    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+}
+
+function checkDesktopWidth(){
+    document.getElementById('mobile-paybutton-div').classList.add('d-none')
+    document.getElementById('aside').classList.remove('d-none')
+    document.getElementById('mobile-basket').classList.add('d-none');
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
+    renderBasket();
 }
 
 /* mobile issues
