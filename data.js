@@ -148,6 +148,6 @@ let dishes = [
 let dishesBasket = [];
 
 const MOBILE_BREAKPOINT = 770;
-const HEART_LIKED = false;
 const DELIVERY_COSTS = 2.00;
 let mobileBasketOpen = false;
+let heartLiked = false;

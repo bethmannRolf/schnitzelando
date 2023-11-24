@@ -14,8 +14,7 @@ function changeMobilBasketStatus() {
     }
 }
 
-
-function checkIfMobileOrNot(){
+function checkIfMobileOrNot() {
 
     if (window.innerWidth < MOBILE_BREAKPOINT) {
         document.getElementById('aside').classList.add('d-none');
@@ -23,16 +22,15 @@ function checkIfMobileOrNot(){
         document.getElementById('mobile-paybutton-div').classList.add('d-none')
         renderDishes()
     }
-    else{
+    else {
         renderDishes()
     }
 }
 
-
 function renderDishes() {
+    loadBasketFromLS()
     hideSearchInput();
     renderTopics()
-    loadBasketFromLS();
     hideClearedBasket();
     hideInformation()
     addMobilePaybuttonOnload()
@@ -65,18 +63,7 @@ function filterDishes() {
     for (let i = 0; i < dishes.length; i++) {
         let searchedDish = dishes[i];
         if (searchedDish['dishName'].toLowerCase().includes(search)) {
-            searchedMenuContainer.innerHTML += `
-            <div class="single-dish">
-               <div class="single-dish-headline">
-                  <div class="single-dish-headline-firstpart">
-                      <h3 class="heading-dish">${searchedDish['dishName']}</h3>
-                      <img src="./img/info.png" class="single-dish-info" id="addingDishes${i}">
-                  </div>
-                  <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
-               </div>
-               <span>${searchedDish['dishdescription']}</span>
-               <span>${searchedDish['price']}€</span>
-            </div>`
+            searchedMenuContainer.innerHTML += filterDishesTemplate(searchedDish['dishName'], i, searchedDish['dishdescription'], searchedDish['price'])
         }
     }
 }
@@ -87,6 +74,7 @@ function hideSearchInput() {
 
 function hideXSearchInput() {
     document.getElementById('search-and-close').classList.add('d-none');
+     location.reload();
 }
 
 function showInputSearch() {
@@ -97,20 +85,8 @@ function renderFavoriteDishes() {
     let dishesContent = document.getElementById('favorites-div');
     dishesContent.innerHTML = '';
     for (let i = 0; i < 3; i++) {
-        const dish = dishes[i];
-        const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
-        dishesContent.innerHTML += ` 
-    <div class="single-dish">
-       <div class="single-dish-headline">
-          <div class="single-dish-headline-firstpart">
-              <h3 class="heading-dish">${dish['dishName']}</h3>
-              <img src="./img/info.png" class="single-dish-info" id="addingDishes${i}">
-          </div>
-          <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
-       </div>
-       <span class="dish-description">${dish['dishdescription']}</span>
-       <span>${formattedPrice} €</span>
-    </div>`
+        const dish = dishes[i]; 
+        dishesContent.innerHTML += renderFavoriteDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price']);
     }
 }
 
@@ -119,19 +95,7 @@ function renderSteakDishes() {
     dishesContent.innerHTML = '';
     for (let i = 3; i < 6; i++) {
         const dish = dishes[i];
-        const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
-        dishesContent.innerHTML += ` 
-    <div class="single-dish">
-       <div class="single-dish-headline">
-          <div class="single-dish-headline-firstpart">
-              <h3 class="heading-dish">${dish['dishName']}</h3>
-              <img src="./img/info.png" class="single-dish-info">
-          </div>
-          <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
-       </div>
-       <span class="dish-description" >${dish['dishdescription']}</span>
-       <span>${formattedPrice} €</span>
-    </div>`
+        dishesContent.innerHTML += renderSteakDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price']);
     }
 }
 
@@ -140,19 +104,7 @@ function renderBurgerDishes() {
     dishesContent.innerHTML = '';
     for (let i = 6; i < 9; i++) {
         const dish = dishes[i];
-        const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
-        dishesContent.innerHTML += ` 
-        <div class="single-dish">
-           <div class="single-dish-headline">
-              <div class="single-dish-headline-firstpart">
-                  <h3 class="heading-dish">${dish['dishName']}</h3>
-                  <img src="./img/info.png" class="single-dish-info">
-              </div>
-              <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-           </div>
-           <span class="dish-description">${dish['dishdescription']}</span>
-           <span>${formattedPrice} €</span>
-        </div>`
+        dishesContent.innerHTML += renderBurgerDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price']);
     }
 }
 
@@ -160,20 +112,8 @@ function renderSchnitzelDishes() {
     let dishesContent = document.getElementById('schnitzel-div');
     dishesContent.innerHTML = '';
     for (let i = 9; i < 12; i++) {
-        const dish = dishes[i];
-        const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
-        dishesContent.innerHTML += ` 
-        <div class="single-dish">
-           <div class="single-dish-headline">
-              <div class="single-dish-headline-firstpart">
-                  <h3 class="heading-dish">${dish['dishName']}</h3>
-                  <img src="./img/info.png" class="single-dish-info">
-              </div>
-              <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
-           </div>
-           <span class="dish-description">${dish['dishdescription']}</span>
-           <span>${formattedPrice} €</span>
-        </div>`
+        const dish = dishes[i];    
+        dishesContent.innerHTML += renderSchnitzelDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price'])
     }
 }
 
@@ -182,19 +122,7 @@ function renderSaladDishes() {
     dishesContent.innerHTML = '';
     for (let i = 12; i < 15; i++) {
         const dish = dishes[i];
-        const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
-        dishesContent.innerHTML += ` 
-        <div class="single-dish">
-           <div class="single-dish-headline">
-              <div class="single-dish-headline-firstpart">
-                  <h3 class="heading-dish">${dish['dishName']}</h3>
-                  <img src="./img/info.png" class="single-dish-info">
-              </div>
-              <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-           </div>
-           <span class="dish-description">${dish['dishdescription']}</span>
-           <span>${formattedPrice} €</span>
-        </div>`
+        dishesContent.innerHTML += renderSaladDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price'])
     }
 }
 
@@ -203,19 +131,7 @@ function renderDrinkDishes() {
     dishesContent.innerHTML = '';
     for (let i = 15; i < 18; i++) {
         const dish = dishes[i];
-        const formattedPrice = dish['price'].toFixed(2).replace('.', ',');
-        dishesContent.innerHTML += ` 
-        <div class="single-dish">
-           <div class="single-dish-headline">
-              <div class="single-dish-headline-firstpart">
-                  <h3 class="heading-dish">${dish['dishName']}</h3>
-                  <img src="./img/info.png" class="single-dish-info">
-              </div>
-              <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-           </div>
-           <span class="dish-description">${dish['dishdescription']}</span>
-           <span>${formattedPrice} €</span>
-        </div>`
+        dishesContent.innerHTML += renderDrinkDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price'])
     }
 }
 
@@ -234,24 +150,20 @@ function clearBasket() {
 function renderLike() {
     let likeButton = document.getElementById('like-section');
     likeButton.innerHTML = '';
-    if (HEART_LIKED == false) {
-        likeButton.innerHTML = `
-        <img id="like-img" src="./img/favorite.png" alt="Favoriten" onclick="changeLikeColor()">
-         `
+    if (heartLiked == false) {
+        likeButton.innerHTML = renderLikeWhiteTemplate();
     }
     else {
-        likeButton.innerHTML = `
-        <img id="like-img" src="./img/favorite_true.png" alt="Favoriten" onclick="changeLikeColor()">
-        `
+        likeButton.innerHTML = renderLikeBlackTemplate();
     }
 }
 
 function changeLikeColor() {
-    if (HEART_LIKED == false) {
-        HEART_LIKED = true;
+    if (heartLiked == false) {
+        heartLiked = true;
     }
     else {
-        HEART_LIKED = false;
+        heartLiked = false;
     }
     renderLike();
 }
@@ -278,29 +190,7 @@ function renderBasket() {
     basketContent.innerHTML = '';
     for (let i = 0; i < dishesBasket.length; i++) {
         const basketdish = dishesBasket[i];
-        let newSum = basketdish['price'] * basketdish['amount'];
-        const formattedNewSum = newSum.toFixed(2).replace('.', ',');
-        basketContent.innerHTML += `
-<div class="singledish-container">
-    <div class="firstline-dishbasket">
-        <span class="amount-basket">${basketdish['amount']}</span>
-        <span class="dishname-basket">${basketdish['dishName']}</span>
-        <span class="sum-dishbasket">${formattedNewSum} €</span>
-    </div>
-    <div class="secondline-dishbasket">
-        <span onclick="openInput(${i})" class="make-annotation">Anmerkung hinzufügen</span>
-        <div class="change-amounts">
-            <img class="basketDishRemove" onclick="reduceAmount(${i})" src="./img/remove.png" width="24px" height="24px">
-            <span class="amount-basket">${basketdish['amount']}</span>
-            <img class="basketDishAdd" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px">
-        </div>
-    </div>
-    <div id="input-container${i}">
-    </div>
-    <div id="saved-comment">${basketdish['comment']}>
-    </div>
-</div>
-`
+        basketContent.innerHTML += renderBasketTemplate(basketdish['amount'], basketdish['dishName'], basketdish['price'], i, basketdish['comment'] )
     }
     checkIfBill()
 }
@@ -317,12 +207,7 @@ function checkIfBill() {
 function openInput(i) {
     let inputContainer = document.getElementById(`input-container${i}`);
     inputContainer.innerHTML = '';
-    inputContainer.innerHTML = `
-        <div >
-            <input id="annotation-input${i}" type="text" placeholder="Anmerkung hinzufügen . . .">
-            <button onclick="saveInput(${i})">Speichern</button>
-        </div>
-    `;
+    inputContainer.innerHTML = openInputTemplate(i);
 }
 
 function saveInput(i) {
@@ -369,27 +254,10 @@ function renderBill() {
     billing.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    billing.innerHTML = `
-    <div id=""whole-bill> 
-        <div id="billing-description">
-            <div id="subtotal">
-                <span>Zwischensumme</span>
-                <span>${subtotal.toFixed(2).replace('.', ',')} €</span>
-            </div>
-            <div id="delivery-costs">
-                <span>Lieferkosten</span>
-                <span>${DELIVERY_COSTS.toFixed(2).replace('.', ',')} €</span>
-            </div>
-            <div id="total-sum">
-                 <span>Gesamt</span>
-                 <span>${total.toFixed(2).replace('.', ',')} €</span>
-            </div>
-        </div>
-        <button class="pay-class" id="paybutton" onclick="clearBasket()">
-            <span  id="paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
-        </button>
-    </div>
-    `
+    let formSub = subtotal.toFixed(2).replace('.', ',')
+    let formDC = DELIVERY_COSTS.toFixed(2).replace('.', ',')
+    let formTotal = total.toFixed(2).replace('.', ',')
+    billing.innerHTML = renderBillTemplate(formSub, formDC, formTotal) 
 }
 
 function renderMobilePaybutton() {
@@ -397,9 +265,8 @@ function renderMobilePaybutton() {
     newMobilePaybtn.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    newMobilePaybtn.innerHTML = `<div><button class="pay-class" id="mobile-paybutton" onclick="clearMobileBasket()" >
- <span  id="mobile-paybutton-span">Bezahlen (${total.toFixed(2).replace('.', ',')} €)</span>
- </button></div>`;
+    let totalForm = total.toFixed(2).replace('.', ',')
+    newMobilePaybtn.innerHTML = renderMobilePaybuttonTemplate(totalForm);
 }
 
 function additionalOrder() {
@@ -436,34 +303,7 @@ function renderMobileBasket() {
     mobileBasketContent.innerHTML = '';
     for (let i = 0; i < dishesBasket.length; i++) {
         const mobileBasketDish = dishesBasket[i];
-        let newSum = mobileBasketDish['price'] * mobileBasketDish['amount'];
-        const formattedNewSum = newSum.toFixed(2).replace('.', ',');
-        mobileBasketContent.innerHTML += `
-    <div class="wholeDish-mobileBasket" >
-        <div class="firstline-mobile-basket">
-            <span class="amount-mobileBasket">${mobileBasketDish['amount']}
-            </span>
-            <span class=""dishname-mobileBasket">${mobileBasketDish['dishName']}
-            </span>
-            <span class="sum-dishmobileBasket">${formattedNewSum} €
-            </span>
-        </div>
-        <div class="secondline-mobile-basket">
-            <span onclick="openInput(${i})" class="make-annotation-mobile">Anmerkung hinzufügen
-            </span>
-            <div class="change-amounts-mobile">
-                <img class="basketDishRemoveMobile" onclick="reduceAmount(${i})" src="./img/remove.png" width="24px" height="24px">
-                <span class="amount-mobilebasket">${mobileBasketDish['amount']}
-                </span>
-                <img class="basketDishAddMobile" onclick="increaseAmount(${i})" src="./img/add.png" width="24px" height="24px" >
-            </div>
-        </div>
-        <div id="input-container${i}">
-        </div>
-        <div id="saved-comment">${mobileBasketDish['comment']}
-        </div>
-    </div>
-        `
+        mobileBasketContent.innerHTML += renderMobileBasketTemplate(mobileBasketDish['amount'], mobileBasketDish['dishName'],mobileBasketDish['price'], i, mobileBasketDish['comment']);   
     }
     checkIfMobileBill();
 }
@@ -498,24 +338,10 @@ function renderMobileBill() {
     mobileBilling.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    mobileBilling.innerHTML = `
-    <div id="whole-mobileBill">
-        <div id="mobileBilling-description">
-            <div id="mobil-subtotal">
-                <span>Zwischensumme</span>
-                <span>${subtotal.toFixed(2).replace('.', ',')} €</span>
-            </div>
-            <div id="mobileDelivery-costs">
-                <span>Lieferkosten</span>
-                <span>${DELIVERY_COSTS.toFixed(2).replace('.', ',')} €</span>
-            </div>
-            <div id="total-mobileSum">
-                <span>Gesamt</span>
-                <span>${total.toFixed(2).replace('.', ',')} €</span>
-            </div>
-        </div>
-    </div>
-    `
+    let formSub = subtotal.toFixed(2).replace('.', ',')
+    let formDC = DELIVERY_COSTS.toFixed(2).replace('.', ',')
+    let formTotal = total.toFixed(2).replace('.', ',')
+    mobileBilling.innerHTML = renderMobileBillTemplate(formSub, formDC, formTotal)   
 }
 
 function closeMobileBasket() {
@@ -531,7 +357,6 @@ window.addEventListener('resize', function () {
 });
 
 function checkWindowWidth() {
-
     if (window.innerWidth < MOBILE_BREAKPOINT && mobileBasketOpen == false) {
         document.getElementById('aside').classList.add('d-none');
         document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
@@ -553,7 +378,7 @@ function checkWindowWidth() {
 /* mobile issues
 */
 
-function addMobilePaybuttonOnload(){
+function addMobilePaybuttonOnload() {
 
     document.getElementById('mobile-paybutton-div').classList.add('d-none')
 }
