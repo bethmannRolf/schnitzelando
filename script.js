@@ -2,29 +2,30 @@ function changeMobilBasketStatus() {
     mobileBasketOpen = !mobileBasketOpen;
     if (mobileBasketOpen == true) {
         renderMobileBasket();
-        document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-        document.getElementById('mobile-paybutton-div').classList.remove('d-none')
-        document.getElementById('mobile-basket').classList.remove('d-none')
+        classChangesMobile();
         renderMobilePaybutton();
     } else {
         renderMobilePaybutton();
         initializedMobileButtonStatus();
-        document.getElementById('mobile-basket').classList.add('d-none')
+        document.getElementById('mobile-basket').classList.add('d-none');
     }
 }
 
 function checkIfMobileOrNot() {
     if (window.innerWidth < MOBILE_BREAKPOINT) {
-        initializedMobileButtonStatus()
+        initializedMobileButtonStatus();
         document.getElementById('aside').classList.add('d-none');
-        renderDishes()
-    }
-    else {
-        renderDishes()
+        renderDishes();
+    }else {
+        renderDishes();
     }
 }
 
-
+function classChangesMobile(){
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
+    document.getElementById('mobile-paybutton-div').classList.remove('d-none');
+    document.getElementById('mobile-basket').classList.remove('d-none');
+}
 
 function initializedMobileButtonStatus(){
     document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
@@ -32,12 +33,12 @@ function initializedMobileButtonStatus(){
 }
 
 function renderDishes() {
-    loadBasketFromLS()
+    loadBasketFromLS();
     hideSearchInput();
-    renderTopics()
+    renderTopics();
     hideClearedBasket();
-    hideInformation()
-    addMobilePaybuttonOnload()
+    hideInformation();
+    addMobilePaybuttonOnload();
 }
 
 function renderTopics() {
@@ -82,7 +83,7 @@ function hideXSearchInput() {
 }
 
 function showInputSearch() {
-    document.getElementById('search-and-close').classList.remove('d-none')
+    document.getElementById('search-and-close').classList.remove('d-none');
 }
 
 function renderFavoriteDishes() {
@@ -146,7 +147,7 @@ function hideClearedBasket() {
 function clearBasket() {
     let clearedContentBasket = document.getElementById('content-basket');
     clearedContentBasket.innerHTML = '';
-    let clearedBasketEndcalculations = document.getElementById('basket-endcalculations')
+    let clearedBasketEndcalculations = document.getElementById('basket-endcalculations');
     clearedBasketEndcalculations.innerHTML = '';
     document.getElementById('checkbox').classList.remove('d-none');
 }
@@ -183,9 +184,8 @@ function addToBasket(index) {
         const selectedDish = { ...dishes[index], amount: 1 };
         dishesBasket.push(selectedDish);
     }
-    renderBasket();
-    renderMobilePaybutton();
-    saveBasketToLS();
+     updateFunction();
+     renderMobilePaybutton();
 }
 
 function renderBasket() {
@@ -197,6 +197,12 @@ function renderBasket() {
         basketContent.innerHTML += renderBasketTemplate(basketdish['amount'], basketdish['dishName'], basketdish['price'], i, basketdish['comment'] )
     }
     checkIfBill()
+}
+
+function updateFunction(){
+
+    renderBasket();
+    saveBasketToLS();
 }
 
 function checkIfBill() {
@@ -218,8 +224,7 @@ function saveInput(i) {
     let annotationInput = document.getElementById(`annotation-input${i}`);
     let annotation = annotationInput.value;
     dishesBasket[i]['comment'] = annotation;
-    renderBasket();
-    saveBasketToLS();
+    updateFunction()
 }
 
 function reduceAmount(i) {
@@ -238,10 +243,8 @@ function increaseAmount(i) {
 
 function changedAmounts(){
     renderMobilePaybutton();
-    renderBasket();
     renderMobileBasket();
-    saveBasketToLS();
-
+    updateFunction();
 }
 
 function calculateBill() {
@@ -249,8 +252,7 @@ function calculateBill() {
     for (let i = 0; i < dishesBasket.length; i++) {
         const basketdish = dishesBasket[i];
         subtotal += basketdish['price'] * basketdish['amount'];
-    }
-    return {
+    }return {
         subtotal
     }
 }
@@ -260,9 +262,9 @@ function renderBill() {
     billing.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    let formSub = subtotal.toFixed(2).replace('.', ',')
-    let formDC = DELIVERY_COSTS.toFixed(2).replace('.', ',')
-    let formTotal = total.toFixed(2).replace('.', ',')
+    let formSub = subtotal.toFixed(2).replace('.', ',');
+    let formDC = DELIVERY_COSTS.toFixed(2).replace('.', ',');
+    let formTotal = total.toFixed(2).replace('.', ',');
     billing.innerHTML = renderBillTemplate(formSub, formDC, formTotal) 
 }
 
@@ -271,20 +273,19 @@ function renderMobilePaybutton() {
     newMobilePaybtn.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    let totalForm = total.toFixed(2).replace('.', ',')
+    let totalForm = total.toFixed(2).replace('.', ',');
     newMobilePaybtn.innerHTML = renderMobilePaybuttonTemplate(totalForm);
 }
 
 function additionalOrder() {
     dishesBasket = [];
-    saveBasketToLS();
-    hideClearedBasket()
-    renderBasket()
+    hideClearedBasket();
+    updateFunction();
 }
 
 function additionalMobilOrder() {
     document.getElementById('mobile-basket').classList.add('d-none');
-    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
+    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
     document.getElementById('mobileBasket-checkdiv').classList.add('d-none');
     changeMobilBasketStatus();
 }
@@ -301,7 +302,7 @@ function loadBasketFromLS() {
     }
 }
 function showMobileBasket() {
-    changeMobilBasketStatus()
+    changeMobilBasketStatus();
 }
 
 function renderMobileBasket() {
@@ -318,16 +319,10 @@ function clearMobileBasket() {
     let clearedMobilBasketEndcalculations = document.getElementById('mobile-basket-html-endcaluculation');
     clearedMobilBasketEndcalculations.innerHTML = '';
     dishesBasket = [];
-    document.getElementById('mobile-paybutton-div').classList.add('d-none')
-    document.getElementById('mobileBasket-checkdiv').classList.remove('d-none')
+    document.getElementById('mobile-paybutton-div').classList.add('d-none');
+    document.getElementById('mobileBasket-checkdiv').classList.remove('d-none');
     saveBasketToLS();
     renderMobileBasket();
-}
-
-function fromMBtoDishes() {
-    document.getElementById('mobile-paybutton-div').classList.add('d-none')
-    document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none')
-    document.getElementById('mobile-basket').classList.add('d-none')
 }
 
 function checkIfMobileBill() {
@@ -344,15 +339,17 @@ function renderMobileBill() {
     mobileBilling.innerHTML = '';
     let { subtotal } = calculateBill();
     let total = subtotal + DELIVERY_COSTS;
-    let formSub = subtotal.toFixed(2).replace('.', ',')
-    let formDC = DELIVERY_COSTS.toFixed(2).replace('.', ',')
-    let formTotal = total.toFixed(2).replace('.', ',')
-    mobileBilling.innerHTML = renderMobileBillTemplate(formSub, formDC, formTotal)   
+    let formSub = subtotal.toFixed(2).replace('.', ',');
+    let formDC = DELIVERY_COSTS.toFixed(2).replace('.', ',');
+    let formTotal = total.toFixed(2).replace('.', ',');
+    mobileBilling.innerHTML = renderMobileBillTemplate(formSub, formDC, formTotal);   
 }
 
 function closeMobileBasket() {
-    document.getElementById('mobile-basket').classList.add('d-none')
+    document.getElementById('mobile-basket').classList.add('d-none');
 }
+
+function formattingIssues(){}
 
 function closeMobileWithX() {
     changeMobilBasketStatus();
@@ -369,33 +366,30 @@ function checkWindowWidth() {
         checkOpenBasketTrue()
     }else {
         mobileBasketOpen = false;
-        checkDesktopWidth()
+        checkDesktopWidth();
     }
 }
 
 function checkOpenBasketFalse(){
     document.getElementById('aside').classList.add('d-none');
     document.getElementById('shoppingBasket-mobileButton-div').classList.remove('d-none');
-    document.getElementById('mobile-paybutton-div').classList.add('d-none')
+    document.getElementById('mobile-paybutton-div').classList.add('d-none');
 }
 
 function checkOpenBasketTrue(){
-    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none')
-    document.getElementById('mobile-paybutton-div').classList.remove('d-none')
+    document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
+    document.getElementById('mobile-paybutton-div').classList.remove('d-none');
 }
 
 function checkDesktopWidth(){
-    document.getElementById('mobile-paybutton-div').classList.add('d-none')
-    document.getElementById('aside').classList.remove('d-none')
+    document.getElementById('mobile-paybutton-div').classList.add('d-none');
+    document.getElementById('aside').classList.remove('d-none');
     document.getElementById('mobile-basket').classList.add('d-none');
     document.getElementById('shoppingBasket-mobileButton-div').classList.add('d-none');
     renderBasket();
 }
 
-/* mobile issues
-*/
-
 function addMobilePaybuttonOnload() {
 
-    document.getElementById('mobile-paybutton-div').classList.add('d-none')
+    document.getElementById('mobile-paybutton-div').classList.add('d-none');
 }

@@ -1,6 +1,6 @@
-function renderFavoriteDishesTemplate(dishName, i,  dishdescription, price){
+function renderFavoriteDishesTemplate(dishName, i, dishdescription, price) {
     let formattedPrice = price.toFixed(2).replace('.', ',');
-    return` 
+    return ` 
     <div class="single-dish">
        <div class="single-dish-headline">
           <div class="single-dish-headline-firstpart">
@@ -15,9 +15,9 @@ function renderFavoriteDishesTemplate(dishName, i,  dishdescription, price){
     `
 }
 
-function renderSteakDishesTemplate(dishName, i,  dishdescription, price){
+function renderSteakDishesTemplate(dishName, i, dishdescription, price) {
     let formattedPrice = price.toFixed(2).replace('.', ',');
-return` 
+    return ` 
 <div class="single-dish">
    <div class="single-dish-headline">
       <div class="single-dish-headline-firstpart">
@@ -32,10 +32,9 @@ return`
 `
 }
 
-function renderBurgerDishesTemplate(dishName, i,  dishdescription, price){
+function renderBurgerDishesTemplate(dishName, i, dishdescription, price) {
     let formattedPrice = price.toFixed(2).replace('.', ',');
-return`
-
+    return `
 <div class="single-dish">
            <div class="single-dish-headline">
               <div class="single-dish-headline-firstpart">
@@ -50,9 +49,9 @@ return`
 `
 }
 
-function renderSchnitzelDishesTemplate(dishName, i,  dishdescription, price){
+function renderSchnitzelDishesTemplate(dishName, i, dishdescription, price) {
     let formattedPrice = price.toFixed(2).replace('.', ',');
-    return`
+    return `
     <div class="single-dish">
     <div class="single-dish-headline">
        <div class="single-dish-headline-firstpart">
@@ -67,30 +66,9 @@ function renderSchnitzelDishesTemplate(dishName, i,  dishdescription, price){
  `
 }
 
-function renderSaladDishesTemplate(dishName, i,  dishdescription, price){
+function renderSaladDishesTemplate(dishName, i, dishdescription, price) {
     let formattedPrice = price.toFixed(2).replace('.', ',');
-
-return` 
-<div class="single-dish">
-   <div class="single-dish-headline">
-      <div class="single-dish-headline-firstpart">
-          <h3 class="heading-dish">${dishName}</h3>
-          <img src="./img/info.png" class="single-dish-info">
-      </div>
-      <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-   </div>
-   <span class="dish-description">${dishdescription}</span>
-   <span>${formattedPrice} €</span>
-</div>
-`
-
-}
-
-
-function renderDrinkDishesTemplate(dishName, i,  dishdescription, price){
-    let formattedPrice = price.toFixed(2).replace('.', ',');
-
-return` 
+    return ` 
 <div class="single-dish">
    <div class="single-dish-headline">
       <div class="single-dish-headline-firstpart">
@@ -105,25 +83,39 @@ return`
 `
 }
 
+function renderDrinkDishesTemplate(dishName, i, dishdescription, price) {
+    let formattedPrice = price.toFixed(2).replace('.', ',');
+    return ` 
+<div class="single-dish">
+   <div class="single-dish-headline">
+      <div class="single-dish-headline-firstpart">
+          <h3 class="heading-dish">${dishName}</h3>
+          <img src="./img/info.png" class="single-dish-info">
+      </div>
+      <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
+   </div>
+   <span class="dish-description">${dishdescription}</span>
+   <span>${formattedPrice} €</span>
+</div>
+`
+}
 
-function renderLikeWhiteTemplate(){
-return`
+function renderLikeWhiteTemplate() {
+    return `
 <img id="like-img" src="./img/favorite.png" alt="Favoriten" onclick="changeLikeColor()">
 `
-
 }
 
-function renderLikeBlackTemplate(){
-return`
+function renderLikeBlackTemplate() {
+    return `
 <img id="like-img" src="./img/favorite_true.png" alt="Favoriten" onclick="changeLikeColor()">
 `
 }
 
-
-function renderBasketTemplate(amount, dishName, price, i, comment){
+function renderBasketTemplate(amount, dishName, price, i, comment) {
     let newSum = price * amount;
     let formattedNewSum = newSum.toFixed(2).replace('.', ',');
-    return`
+    return `
     <div class="singledish-container">
     <div class="firstline-dishbasket">
         <span class="amount-basket">${amount}</span>
@@ -143,11 +135,11 @@ function renderBasketTemplate(amount, dishName, price, i, comment){
     <div id="saved-comment">${comment}>
     </div>
 </div>
-    `
+ `
 }
 
-function openInputTemplate(i){
-return`
+function openInputTemplate(i) {
+    return `
 <div >
 <input id="annotation-input${i}" type="text" placeholder="Anmerkung hinzufügen . . .">
 <button onclick="saveInput(${i})">Speichern</button>
@@ -155,10 +147,8 @@ return`
 `
 }
 
-
-function renderBillTemplate(formSub, formDC, formTotal){
-  
-return`
+function renderBillTemplate(formSub, formDC, formTotal) {
+    return `
 <div id=""whole-bill> 
 <div id="billing-description">
     <div id="subtotal">
@@ -181,19 +171,18 @@ return`
 `
 }
 
-function renderMobilePaybuttonTemplate(totalForm){
-    return`
+function renderMobilePaybuttonTemplate(totalForm) {
+    return `
     <div><button class="pay-class" id="mobile-paybutton" onclick="clearMobileBasket()" >
  <span  id="mobile-paybutton-span">Bezahlen (${totalForm} €)</span>
  </button></div>
     `
 }
 
-
-function renderMobileBasketTemplate(amount, dishName, price, i, comment){
+function renderMobileBasketTemplate(amount, dishName, price, i, comment) {
     let newSum = price * amount;
     let formattedNewSum = newSum.toFixed(2).replace('.', ',');
-return`
+    return `
 <div class="wholeDish-mobileBasket" >
 <div class="firstline-mobile-basket">
     <span class="amount-mobileBasket">${amount}
@@ -221,8 +210,8 @@ return`
 `
 }
 
-function renderMobileBillTemplate(formSub, formDC, formTotal){
-return`
+function renderMobileBillTemplate(formSub, formDC, formTotal) {
+    return `
 <div id="whole-mobileBill">
 <div id="mobileBilling-description">
     <div id="mobil-subtotal">
@@ -242,9 +231,8 @@ return`
 `
 }
 
-function filterDishesTemplate(dishName, i , dishdescription, price){
-
-return`
+function filterDishesTemplate(dishName, i, dishdescription, price) {
+    return `
 <div class="single-dish">
                <div class="single-dish-headline">
                   <div class="single-dish-headline-firstpart">
