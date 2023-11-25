@@ -43,12 +43,12 @@ function renderDishes() {
 
 function renderTopics() {
     renderLike();
-    renderFavoriteDishes();
-    renderSteakDishes();
-    renderBurgerDishes();
-    renderSchnitzelDishes();
-    renderSaladDishes();
-    renderDrinkDishes();
+    renderDishesByCategory('favorites', 0, 3, dishesTemplate);
+    renderDishesByCategory('steak', 3, 6, dishesTemplate);
+    renderDishesByCategory('burger', 6, 9, dishesTemplate);
+    renderDishesByCategory('schnitzel', 9, 12, dishesTemplate);
+    renderDishesByCategory('salad', 12, 15, dishesTemplate);
+    renderDishesByCategory('drinks', 15, 18, dishesTemplate);
     renderBasket();
 }
 
@@ -86,57 +86,14 @@ function showInputSearch() {
     document.getElementById('search-and-close').classList.remove('d-none');
 }
 
-function renderFavoriteDishes() {
-    let dishesContent = document.getElementById('favorites-div');
+function renderDishesByCategory(category, start, end, templateFunction) {
+    let dishesContent = document.getElementById(`${category}-div`);
     dishesContent.innerHTML = '';
-    for (let i = 0; i < 3; i++) {
-        const dish = dishes[i]; 
-        dishesContent.innerHTML += renderFavoriteDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price']);
-    }
-}
 
-function renderSteakDishes() {
-    let dishesContent = document.getElementById('steak-div');
-    dishesContent.innerHTML = '';
-    for (let i = 3; i < 6; i++) {
+    for (let i = start; i < end; i++) {
         const dish = dishes[i];
-        dishesContent.innerHTML += renderSteakDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price']);
-    }
-}
+        dishesContent.innerHTML += templateFunction(dish['dishName'], i, dish['dishdescription'], dish['price']);
 
-function renderBurgerDishes() {
-    let dishesContent = document.getElementById('burger-div');
-    dishesContent.innerHTML = '';
-    for (let i = 6; i < 9; i++) {
-        const dish = dishes[i];
-        dishesContent.innerHTML += renderBurgerDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price']);
-    }
-}
-
-function renderSchnitzelDishes() {
-    let dishesContent = document.getElementById('schnitzel-div');
-    dishesContent.innerHTML = '';
-    for (let i = 9; i < 12; i++) {
-        const dish = dishes[i];    
-        dishesContent.innerHTML += renderSchnitzelDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price'])
-    }
-}
-
-function renderSaladDishes() {
-    let dishesContent = document.getElementById('salad-div');
-    dishesContent.innerHTML = '';
-    for (let i = 12; i < 15; i++) {
-        const dish = dishes[i];
-        dishesContent.innerHTML += renderSaladDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price'])
-    }
-}
-
-function renderDrinkDishes() {
-    let dishesContent = document.getElementById('drinks-div');
-    dishesContent.innerHTML = '';
-    for (let i = 15; i < 18; i++) {
-        const dish = dishes[i];
-        dishesContent.innerHTML += renderDrinkDishesTemplate(dish['dishName'], i, dish['dishdescription'], dish['price'])
     }
 }
 

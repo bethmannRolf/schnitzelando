@@ -1,4 +1,4 @@
-function renderFavoriteDishesTemplate(dishName, i, dishdescription, price) {
+function dishesTemplate(dishName, i, dishdescription, price) {
     let formattedPrice = price.toFixed(2).replace('.', ',');
     return ` 
     <div class="single-dish">
@@ -13,91 +13,6 @@ function renderFavoriteDishesTemplate(dishName, i, dishdescription, price) {
        <span>${formattedPrice} €</span>
     </div>
     `
-}
-
-function renderSteakDishesTemplate(dishName, i, dishdescription, price) {
-    let formattedPrice = price.toFixed(2).replace('.', ',');
-    return ` 
-<div class="single-dish">
-   <div class="single-dish-headline">
-      <div class="single-dish-headline-firstpart">
-          <h3 class="heading-dish">${dishName}</h3>
-          <img src="./img/info.png" class="single-dish-info">
-      </div>
-      <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
-   </div>
-   <span class="dish-description" >${dishdescription}</span>
-   <span>${formattedPrice} €</span>
-</div>
-`
-}
-
-function renderBurgerDishesTemplate(dishName, i, dishdescription, price) {
-    let formattedPrice = price.toFixed(2).replace('.', ',');
-    return `
-<div class="single-dish">
-           <div class="single-dish-headline">
-              <div class="single-dish-headline-firstpart">
-                  <h3 class="heading-dish">${dishName}</h3>
-                  <img src="./img/info.png" class="single-dish-info">
-              </div>
-              <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-           </div>
-           <span class="dish-description">${dishdescription}</span>
-           <span>${formattedPrice} €</span>
-        </div>
-`
-}
-
-function renderSchnitzelDishesTemplate(dishName, i, dishdescription, price) {
-    let formattedPrice = price.toFixed(2).replace('.', ',');
-    return `
-    <div class="single-dish">
-    <div class="single-dish-headline">
-       <div class="single-dish-headline-firstpart">
-           <h3 class="heading-dish">${dishName}</h3>
-           <img src="./img/info.png" class="single-dish-info">
-       </div>
-       <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})" >
-    </div>
-    <span class="dish-description">${dishdescription}</span>
-    <span>${formattedPrice} €</span>
- </div>
- `
-}
-
-function renderSaladDishesTemplate(dishName, i, dishdescription, price) {
-    let formattedPrice = price.toFixed(2).replace('.', ',');
-    return ` 
-<div class="single-dish">
-   <div class="single-dish-headline">
-      <div class="single-dish-headline-firstpart">
-          <h3 class="heading-dish">${dishName}</h3>
-          <img src="./img/info.png" class="single-dish-info">
-      </div>
-      <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-   </div>
-   <span class="dish-description">${dishdescription}</span>
-   <span>${formattedPrice} €</span>
-</div>
-`
-}
-
-function renderDrinkDishesTemplate(dishName, i, dishdescription, price) {
-    let formattedPrice = price.toFixed(2).replace('.', ',');
-    return ` 
-<div class="single-dish">
-   <div class="single-dish-headline">
-      <div class="single-dish-headline-firstpart">
-          <h3 class="heading-dish">${dishName}</h3>
-          <img src="./img/info.png" class="single-dish-info">
-      </div>
-      <img src="./img/add.png" class="add-button" onclick="addToBasket(${i})">
-   </div>
-   <span class="dish-description">${dishdescription}</span>
-   <span>${formattedPrice} €</span>
-</div>
-`
 }
 
 function renderLikeWhiteTemplate() {
